@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DyyStalker — Cek Profil Instagram</title>
+<meta name="description" content="Lihat ringkasan publik sebuah akun Instagram: avatar, bio, jumlah postingan, followers, dan following.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<meta name="theme-color" content="#F1EDE3">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DyyMovie">
+<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+    </span>
+    <span class="brand-word">DyyStalker</span>
+  </div>
+  <span class="brand-tag">Pencari profil Instagram</span>
+</header>
+
+<main class="app">
+
+  <section class="hero">
+    <h1>Lihat ringkasan profil Instagram mana pun</h1>
+    <p>Masukkan username publik — avatar, bio, jumlah postingan, followers, dan following langsung tampil.</p>
+
+    <form id="searchForm" class="search-row" autocomplete="off">
+      <div class="input-wrap">
+        <span class="input-prefix">@</span>
+        <input id="usernameInput" type="text" inputmode="text" placeholder="username" maxlength="40" aria-label="Username Instagram">
+      </div>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="btn-label">Cari</span>
+        <svg class="btn-spinner" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+      </button>
+    </form>
+  </section>
+
+  <section id="resultZone" class="result-zone" aria-live="polite"></section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Menampilkan data publik akun Instagram lewat API pihak ketiga. Hanya untuk akun yang dapat diakses publik; akun privat hanya menampilkan info dasar yang tersedia.</p>
+</footer>
+
+<script src="app.js"></script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>

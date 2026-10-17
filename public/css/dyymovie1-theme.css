@@ -1,0 +1,305 @@
+/* ============================================================
+   DyyMovie1 — TEMA BUKU CATATAN (sama seperti tema web utama)
+   Dimuat otomatis oleh /assets/shell.js hanya pada halaman DyyMovie1.
+   Hanya mengubah tampilan (warna, font, border, bayangan). Tidak
+   mengubah markup, API, pemutar, maupun logika JavaScript.
+   Palet & gaya mengikuti /assets/shell.css (kertas krem, tinta hangat,
+   border "digambar tangan", sticky note kuning, merah #A3232B).
+   Halaman Anime dan player kini memakai bahasa visual yang sama.
+   ============================================================ */
+
+/* ---------- Token warna ---------- */
+body{
+  --ink:#1D1B18; --ink2:#5A5346;
+  --paper:#FCFBF7; --paper2:#F1EDE3; --paper-line:#DCE2EC; --card:#FFFEFB;
+  --sticky:#FFF27A; --tape:#F3CF86;
+  --nb-shadow:rgba(29,27,24,.16);
+  --wobble:7px 5px 8px 4px / 5px 8px 4px 7px;
+
+  --bg:#FCFBF7; --bg-2:#FFFEFB; --bg-3:#FFFEFB; --bg-4:#F1EDE3;
+  --red:#A3232B; --red-2:#D9574F; --red-glow:rgba(163,35,43,.35);
+  --gold:#C46A0A;
+  --text:#1D1B18; --muted:#5A5346; --border:#1D1B18;
+  --radius:7px; --shadow:5px 6px 0 rgba(29,27,24,.16);
+  font-family:'Patrick Hand','Segoe UI',system-ui,sans-serif;
+  color:var(--ink);
+}
+
+/* ---------- Dasar: kertas bergaris + garis margin merah ---------- */
+html:has(body){background:#FCFBF7}
+body{
+  font-size:16px;line-height:1.5;
+  background:
+    repeating-linear-gradient(to bottom,transparent 0 29px,var(--paper-line) 29px 30px) 0 60px / 100% 30px,
+    #FCFBF7;
+  background-attachment:fixed;
+}
+body::before{
+  content:'';position:fixed;inset:0 auto 0 12px;width:2px;height:auto;
+  background:rgba(217,87,79,.8);pointer-events:none;z-index:0;
+}
+body ::selection{background:#FFF27A;color:#1D1B18}
+body *{-webkit-tap-highlight-color:rgba(255,242,122,.5)}
+body ::-webkit-scrollbar{width:10px;height:10px}
+body ::-webkit-scrollbar-track{background:#F1EDE3}
+body ::-webkit-scrollbar-thumb{background:#1D1B18;border-radius:0;border:2px solid #FCFBF7}
+body ::-webkit-scrollbar-thumb:hover{background:#A3232B}
+body h1,body h2,body h3{font-family:'Caveat','Patrick Hand',cursive;font-weight:700;letter-spacing:0}
+
+/* ---------- MENU ATAS (navbar) ---------- */
+body .nav{
+  background:#F1EDE3;border-bottom:2px solid #1D1B18;
+  box-shadow:0 3px 0 rgba(29,27,24,.16);
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  min-height:calc(72px + env(safe-area-inset-top,0px));
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:0;
+}
+body .nav.scrolled{background:#F1EDE3;border-bottom:2px solid #1D1B18}
+body .logo{font-family:'Caveat','Patrick Hand',cursive;font-size:36px;font-weight:700;letter-spacing:0;line-height:1}
+body .logo .z{color:#A3232B;text-shadow:none}
+body .logo .rest{color:#1D1B18}
+body .logo .dot{color:#A3232B}
+body .nav-links{font-family:'Patrick Hand',sans-serif;font-size:18px;font-weight:400;color:#5A5346;gap:10px}
+body .nav-links a{padding:5px 13px;border:1.5px solid transparent;border-radius:var(--wobble);color:#1D1B18;transition:background .15s,transform .15s,box-shadow .15s}
+body .nav-links a:hover{background:#FFF27A;color:#1D1B18;border-color:#1D1B18;transform:translate(-1px,-1px)}
+body .nav-links a.active{background:#FFF27A;color:#1D1B18;border-color:#1D1B18;box-shadow:2px 3px 0 rgba(29,27,24,.16)}
+body .nav-links a.active::after{display:none}
+
+/* ---------- HERO ---------- */
+body .hero{
+  margin:16px 4% 0;padding:72px 36px 48px;min-height:min(70vh,560px);
+  border:2px solid #1D1B18;border-radius:var(--wobble);overflow:hidden;
+  background:#FFFEFB;box-shadow:5px 6px 0 rgba(29,27,24,.16);
+}
+body .hero-bg{opacity:.55;filter:saturate(.9) sepia(.12)}
+body .hero::after{
+  background:
+    linear-gradient(90deg,#FCFBF7 6%,rgba(252,251,247,.9) 38%,rgba(252,251,247,.3) 72%,transparent 100%),
+    linear-gradient(0deg,#FCFBF7 2%,transparent 55%);
+}
+body .hero-badge{
+  background:#FFF27A;border:1.6px solid #1D1B18;color:#1D1B18;border-radius:var(--wobble);
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.08em;
+  backdrop-filter:none;box-shadow:2px 3px 0 rgba(29,27,24,.16);
+}
+body .hero-badge .pulse{background:#A3232B}
+body .hero-title{
+  font-family:'Caveat','Patrick Hand',cursive;font-weight:700;letter-spacing:0;line-height:.98;
+  font-size:clamp(46px,7vw,86px);color:#1D1B18;text-shadow:none;
+}
+body .hero-meta{color:#5A5346;font-family:'Patrick Hand',sans-serif;font-size:17px}
+body .hero-meta .score{color:#A3232B;font-weight:700}
+body .hero-meta .pill,body .modal-meta .pill{
+  background:#FFFEFB;border:1.5px solid #1D1B18;border-radius:var(--wobble);color:#1D1B18;font-size:14px;padding:2px 11px;
+}
+body .hero-desc{color:#1D1B18;font-family:'Patrick Hand',sans-serif;font-size:19px;line-height:1.5}
+
+/* ---------- TOMBOL ---------- */
+body .btn{
+  font-family:'Patrick Hand',sans-serif;font-size:19px;font-weight:400;
+  border:2px solid #1D1B18;border-radius:var(--wobble);padding:11px 26px;
+  box-shadow:3px 4px 0 rgba(29,27,24,.16);
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+body .btn-primary{background:#A3232B;color:#fff;box-shadow:3px 4px 0 rgba(29,27,24,.16)}
+body .btn-primary:hover{background:#A3232B;filter:none;transform:translate(-1px,-2px);box-shadow:4px 6px 0 rgba(29,27,24,.2)}
+body .btn-ghost{background:#FFFEFB;color:#1D1B18;border:2px solid #1D1B18;backdrop-filter:none;-webkit-backdrop-filter:none}
+body .btn-ghost:hover{background:#FFF27A;transform:translate(-1px,-2px);box-shadow:4px 6px 0 rgba(29,27,24,.2)}
+
+/* ---------- SECTION & TAB ---------- */
+body .section-title{font-family:'Caveat','Patrick Hand',cursive;font-size:36px;font-weight:700;letter-spacing:0;color:#1D1B18;line-height:1.05}
+body .section-title::before{width:6px;height:26px;border-radius:2px;background:#A3232B;box-shadow:none}
+body .tabs{background:#F1EDE3;border:2px solid #1D1B18;border-radius:var(--wobble);box-shadow:2px 3px 0 rgba(29,27,24,.16)}
+body .tab{font-family:'Patrick Hand',sans-serif;font-size:16px;font-weight:400;color:#1D1B18;border:1.4px solid transparent;border-radius:var(--wobble)}
+body .tab.active{background:#FFF27A;color:#1D1B18;border-color:#1D1B18;box-shadow:2px 2px 0 rgba(29,27,24,.16)}
+body .tab:hover:not(.active){color:#A3232B}
+body .row-scroll{padding:8px 6px 16px 4px;margin:-8px -6px 0 -4px;scroll-padding-left:4px}
+
+/* ---------- KARTU FILM ---------- */
+body .card{
+  background:#FFFEFB;border:2px solid #1D1B18;border-radius:var(--wobble);
+  box-shadow:3px 4px 0 rgba(29,27,24,.16);
+}
+body .card:hover{transform:translate(-2px,-4px);box-shadow:5px 7px 0 rgba(29,27,24,.2);border-color:#1D1B18}
+body .card-poster{background:#E9E3D3;border-bottom:2px solid #1D1B18}
+body .card:hover .card-poster img{transform:scale(1.05);filter:brightness(.85)}
+body .card-rank{
+  background:#A3232B;color:#fff;border:1.6px solid #1D1B18;border-radius:var(--wobble);
+  font-family:'JetBrains Mono',monospace;font-weight:700;box-shadow:2px 2px 0 rgba(29,27,24,.25);
+}
+body .card-score{
+  background:#FFF27A;color:#1D1B18;border:1.6px solid #1D1B18;border-radius:var(--wobble);
+  font-family:'JetBrains Mono',monospace;font-weight:700;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+body .btn-mini{
+  background:#FFFEFB;color:#1D1B18;border:1.6px solid #1D1B18;border-radius:var(--wobble);
+  backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:2px 2px 0 rgba(29,27,24,.25);
+}
+body .btn-mini:hover{background:#A3232B;border-color:#1D1B18;color:#fff;transform:translate(-1px,-1px)}
+body .btn-mini.active{background:#A3232B;border-color:#1D1B18;color:#fff}
+body .card-overlay{background:linear-gradient(0deg,rgba(29,27,24,.9) 0%,rgba(29,27,24,.35) 48%,transparent 72%)}
+body .card-play{background:#A3232B;border:2px solid #1D1B18;box-shadow:2px 3px 0 rgba(29,27,24,.35)}
+body .card-overlay-genres span{background:#FFF27A;color:#1D1B18;border:1.2px solid #1D1B18;border-radius:var(--wobble);backdrop-filter:none;-webkit-backdrop-filter:none;font-family:'Patrick Hand',sans-serif;font-size:12px}
+body .card-info{background:#FFFEFB}
+body .card-title{font-family:'Patrick Hand',sans-serif;font-size:17px;font-weight:400;color:#1D1B18;line-height:1.25}
+body .card-sub{font-family:'Patrick Hand',sans-serif;font-size:14px;color:#5A5346}
+body .card-sub .star{color:#A3232B;font-weight:400}
+
+/* ---------- LOADING / KOSONG ---------- */
+body .skeleton{background:linear-gradient(90deg,#EEE9DF 25%,#F8F5EE 50%,#EEE9DF 75%);background-size:200% 100%;border:1.5px solid rgba(29,27,24,.28);border-radius:var(--wobble)}
+body .state{color:#5A5346;font-family:'Patrick Hand',sans-serif}
+body .state svg{opacity:.5;color:#1D1B18}
+body .state h3{color:#1D1B18;font-size:30px;font-weight:700}
+body .state p{font-size:17px}
+body .spinner{border:3px solid rgba(29,27,24,.14);border-top-color:#A3232B}
+
+/* ---------- MENU BAWAH (dock) ---------- */
+body .dock{
+  background:#F1EDE3;border-top:2px solid #1D1B18;box-shadow:0 -3px 0 rgba(29,27,24,.16);
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+body .dock-btn{
+  font-family:'Patrick Hand',sans-serif;font-size:13px;font-weight:400;color:#5A5346;
+  height:calc(100% - 16px);align-self:center;border:1.5px solid transparent;border-radius:var(--wobble);
+  transition:background .15s,color .15s,transform .15s;
+}
+body .dock-btn:hover{color:#1D1B18}
+body .dock-btn.active{background:#FFF27A;color:#1D1B18;border-color:#1D1B18;box-shadow:2px 3px 0 rgba(29,27,24,.16)}
+body .dock-btn.active svg{transform:translateY(-1px);filter:none;color:#A3232B}
+body .dock-btn.active::before{display:none}
+body .dock-badge{background:#A3232B;color:#fff;border:1.6px solid #1D1B18;box-shadow:none;font-family:'JetBrains Mono',monospace}
+
+/* ---------- TOAST (sticky note) ---------- */
+body .toast{
+  background:#FFF27A;color:#1D1B18;border:2px solid #1D1B18;border-radius:var(--wobble);
+  box-shadow:3px 4px 0 rgba(29,27,24,.2);backdrop-filter:none;-webkit-backdrop-filter:none;
+  font-family:'Patrick Hand',sans-serif;font-size:17px;font-weight:400;
+}
+body .toast .dot{background:#A3232B;box-shadow:none}
+
+/* ---------- TAB: FAVORIT / RIWAYAT / TRENDING ---------- */
+body .tab-hero h1,body .search-hero h1{font-family:'Caveat','Patrick Hand',cursive;font-size:clamp(38px,6vw,58px);font-weight:700;letter-spacing:0;color:#1D1B18;line-height:1.05}
+body .tab-hero h1 .red,body .search-hero h1 .red{background:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;color:#A3232B}
+body .tab-hero p,body .search-hero .sub{color:#5A5346;font-family:'Patrick Hand',sans-serif;font-size:18px}
+body .tab-hero .count{background:#FFFEFB;border:1.6px solid #1D1B18;border-radius:var(--wobble);color:#1D1B18;font-family:'Patrick Hand',sans-serif;font-size:16px;font-weight:400;box-shadow:2px 2px 0 rgba(29,27,24,.16)}
+body .tab-hero .count .red{color:#A3232B}
+
+/* ---------- PENCARIAN ---------- */
+body .big-search{background:#FFFEFB;border:2px solid #1D1B18;border-radius:var(--wobble);box-shadow:4px 5px 0 rgba(29,27,24,.16)}
+body .big-search:focus-within{border-color:#A3232B;box-shadow:4px 5px 0 rgba(163,35,43,.28)}
+body .big-search svg.lead{color:#5A5346}
+body .big-search:focus-within svg.lead{color:#A3232B}
+body .big-search input{color:#1D1B18;font-family:'Patrick Hand',sans-serif;font-size:20px;font-weight:400}
+body .big-search input::placeholder{color:#8a8171}
+body .btn-clear{background:#F1EDE3;border:1.4px solid #1D1B18;color:#1D1B18}
+body .btn-clear:hover{background:#A3232B;color:#fff}
+body .btn-search{background:#A3232B;color:#fff;border:2px solid #1D1B18;border-radius:var(--wobble);font-family:'Patrick Hand',sans-serif;font-size:18px;font-weight:400;box-shadow:2px 3px 0 rgba(29,27,24,.2)}
+body .btn-search:hover{filter:none;transform:translate(-1px,-2px);box-shadow:3px 5px 0 rgba(29,27,24,.22)}
+body .chips-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.08em;color:#A3232B}
+body .chips-title svg,body .chip .fire{color:#A3232B}
+body .chip{background:#FFFEFB;border:1.6px solid #1D1B18;border-radius:var(--wobble);color:#1D1B18;font-family:'Patrick Hand',sans-serif;font-size:16px;font-weight:400;box-shadow:2px 2px 0 rgba(29,27,24,.16)}
+body .chip:hover{background:#FFF27A;border-color:#1D1B18;color:#1D1B18;transform:translate(-1px,-2px)}
+body .chip.chip-clear{border-color:#A3232B;color:#A3232B}
+body .chip.chip-clear:hover{background:#FBE9E7;color:#A3232B}
+body .search-section-title{font-family:'Caveat','Patrick Hand',cursive;font-size:30px;font-weight:700;letter-spacing:0;color:#1D1B18}
+body .search-section-title::before{width:5px;height:20px;border-radius:2px;background:#A3232B;box-shadow:none}
+
+/* ---------- MODAL DETAIL ---------- */
+body .modal-backdrop{background:rgba(29,27,24,.55);backdrop-filter:none;-webkit-backdrop-filter:none}
+body .modal{background:#FCFBF7;border:2px solid #1D1B18;border-radius:10px;box-shadow:7px 8px 0 rgba(29,27,24,.3)}
+body .modal-head{border-bottom:2px solid #1D1B18}
+body .modal-head::after{background:linear-gradient(0deg,#FCFBF7 4%,rgba(252,251,247,.5) 50%,transparent 100%)}
+body .modal-close{background:#FFFEFB;color:#1D1B18;border:2px solid #1D1B18;border-radius:var(--wobble);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:2px 3px 0 rgba(29,27,24,.2)}
+body .modal-close:hover{background:#A3232B;color:#fff}
+body .modal-title{font-family:'Caveat','Patrick Hand',cursive;font-size:clamp(34px,5vw,50px);font-weight:700;letter-spacing:0;line-height:1;color:#1D1B18}
+body .modal-meta{color:#5A5346;font-family:'Patrick Hand',sans-serif;font-size:16px}
+body .modal-meta .score{color:#A3232B;font-weight:700}
+body .modal-genres span{background:#FFF27A;border:1.5px solid #1D1B18;color:#1D1B18;border-radius:var(--wobble);font-family:'Patrick Hand',sans-serif;font-size:15px;font-weight:400}
+body .modal-desc{color:#1D1B18;font-family:'Patrick Hand',sans-serif;font-size:18px;line-height:1.55}
+
+/* ---------- RESPONSIF ---------- */
+@media (max-width:768px){
+  body::before{left:10px}
+}
+@media (max-width:600px){
+  body .logo{font-size:32px}
+  body .hero{margin:12px 4% 0;padding:56px 18px 30px;min-height:auto}
+  body .hero-title{font-size:clamp(40px,12vw,56px)}
+  body .hero-desc{font-size:17px}
+  body .btn{padding:10px 20px;font-size:17px}
+  body .section-title{font-size:30px}
+  body .state h3{font-size:26px}
+  body .dock-btn{font-size:12px}
+  body .card-title{font-size:16px}
+  body .modal-title{font-size:34px}
+  body .big-search input{font-size:18px}
+  body .btn-search{padding:10px 16px;font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  body .card,body .btn,body .chip,body .dock-btn,body .nav-links a{transition:none}
+}
+
+
+/* ---------- Konsistensi menu global DyyMovie1 ---------- */
+body .hb-btn{background:#FFF27A!important;color:#1D1B18!important;border:2px solid #1D1B18!important;border-radius:7px!important;box-shadow:3px 3px 0 rgba(29,27,24,.18)!important}
+body .hb-ov{background:rgba(29,27,24,.42)!important}
+body .hb-dr{background:#FCFBF7!important;color:#1D1B18!important;border-left:2px solid #1D1B18!important;box-shadow:-5px 0 0 rgba(29,27,24,.12)!important}
+body .hb-head{background:#F1EDE3!important;border-bottom:2px solid #1D1B18!important}
+body .hb-brand-text strong,body .hb-link{color:#1D1B18!important}
+body .hb-brand-text small{color:#5A5346!important}
+body .hb-link{border:1.5px solid transparent!important;border-radius:7px!important}
+body .hb-link:hover,body .hb-link.on{background:#FFF27A!important;border-color:#1D1B18!important;color:#1D1B18!important;box-shadow:2px 3px 0 rgba(29,27,24,.13)!important}
+body .hb-x{background:#FFF27A!important;color:#1D1B18!important;border:1.5px solid #1D1B18!important;border-radius:7px!important}
+@media(prefers-reduced-motion:reduce){body *,body *::before,body *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+/* ============================================================
+   PERBAIKAN: teks memuat player, teks logo navbar, dukungan PC
+   ============================================================ */
+
+/* Teks "Memuat / Menyiapkan player..." tampak jelas di atas kotak player hitam */
+body .player-aspect .fallback,
+body .anime-player-box .fallback{background:#000;color:#F5F5F7}
+body .player-aspect .fallback p,
+body .anime-player-box .fallback p{color:#F5F5F7;font-family:'Patrick Hand',sans-serif;font-size:18px;opacity:1}
+body .player-aspect .fallback h3,
+body .anime-player-box .fallback h3{color:#fff}
+body .player-aspect .fallback .spinner,
+body .anime-player-box .fallback .spinner,
+body .player-loading .spinner{border:3px solid rgba(255,255,255,.18);border-top-color:#FF4B55}
+
+/* ---------- PC / mouse ---------- */
+body .card-poster img{width:100%;height:100%;object-fit:cover;background:#EEE9DF}
+body .dyy-row-host{position:relative}
+body .dyy-row-arrow{
+  display:none;position:absolute;top:calc(50% - 20px);z-index:6;width:42px;height:42px;
+  align-items:center;justify-content:center;padding:0;cursor:pointer;
+  background:#FFF27A;color:#1D1B18;border:2px solid #1D1B18;border-radius:var(--wobble);
+  box-shadow:3px 4px 0 rgba(29,27,24,.25);transition:transform .15s,opacity .2s,background .15s;
+}
+body .dyy-row-prev{left:-6px}
+body .dyy-row-next{right:-6px}
+body .dyy-row-arrow:hover{background:#A3232B;color:#fff;transform:translate(-1px,-1px)}
+body .dyy-row-arrow.off{opacity:0;pointer-events:none}
+@media (hover:hover) and (pointer:fine){
+  body .dyy-row-arrow{display:flex}
+  body .row-scroll{cursor:grab;scrollbar-width:thin;scrollbar-color:#1D1B18 #F1EDE3}
+  body .row-scroll.dyy-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+  body .row-scroll.dyy-dragging .card{pointer-events:none}
+  body .row-scroll img{-webkit-user-drag:none;user-select:none}
+}
+@media (min-width:1100px){
+  body .grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:24px 20px}
+  body .row-scroll .card{min-width:200px;max-width:200px}
+  body .modal{max-width:960px}
+}
+@media (min-width:1600px){
+  body .section,body main{max-width:1760px;margin-left:auto;margin-right:auto}
+}
+
+/* Toast "Memuat..." : sembunyi total saat tidak aktif (tidak mengintip di atas menu bawah), jelas saat tampil */
+body .toast{opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-50%) translateY(160px);transition:transform .4s cubic-bezier(.2,.9,.3,1),opacity .25s,visibility 0s linear .4s;color:#1D1B18;bottom:calc(var(--dock-h) + 20px + env(safe-area-inset-bottom,0px))}
+body .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);transition:transform .4s cubic-bezier(.2,.9,.3,1),opacity .25s,visibility 0s}
+body .toast #toastMsg{color:#1D1B18}
+body .nt-btn{background:#FFF27A!important;color:#1D1B18!important;border:2px solid #1D1B18!important;border-radius:7px!important;box-shadow:3px 3px 0 rgba(29,27,24,.18)!important}
+body .nt-ov{background:rgba(29,27,24,.42)!important}

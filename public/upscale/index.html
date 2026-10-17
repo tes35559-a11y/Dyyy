@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DyyUpscale</title>
+<meta property="og:description" content="Website Peng hd Foto Kini rilis dengan desai kece V2.">
+<meta property="og:image" content="https://l.top4top.io/p_39239gnas0.jpg">
+<meta property="og:url" content="https://upscale-image-farov2.vercel.app">
+<meta property="og:type" content="website">
+<style>
+@font-face{font-family:Rajdhani;font-weight:400;font-display:swap;src:url('Rajdhani-Regular.ttf') format('truetype'),url('https://raw.githubusercontent.com/calonsurga090-ship-it/My-Font/main/Rajdhani-Regular.ttf') format('truetype')}
+:root,[data-theme=dark]{--bg:#0f1115;--bg2:#181b22;--fg:#eceef2;--mut:#98a0ad;--a:#6ea8ff;--b:#b78cff;--line:#2a2f3a;--on:#0b0d12}
+[data-theme=sea]{--bg:#05283a;--bg2:#0a3a52;--fg:#e6f8fb;--mut:#8fbfcc;--a:#22d3ee;--b:#2dd4a7;--line:#14536e;--on:#04212d}
+[data-theme=light]{--bg:#f5f6fa;--bg2:#ffffff;--fg:#14161c;--mut:#5d6473;--a:#3b6cf5;--b:#8b5cf6;--line:#d9dce5;--on:#ffffff}
+[data-theme=purple]{--bg:#190e32;--bg2:#251548;--fg:#f3ebff;--mut:#b7a3da;--a:#c084fc;--b:#f472b6;--line:#3b2670;--on:#1b0a33}
+[data-theme=gold]{--bg:#17120a;--bg2:#241c0e;--fg:#fbf3df;--mut:#c2b28a;--a:#f5c04a;--b:#ffdf8a;--line:#4a3a1a;--on:#1a1204}
+[data-theme=star]{--bg:#04050e;--bg2:#0b0d1e;--fg:#eef1ff;--mut:#9aa3d1;--a:#cfd8ff;--b:#7f8cff;--line:#20264a;--on:#04050e}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:400 18px/1.5 Rajdhani,system-ui,sans-serif;min-height:100svh;transition:background .4s,color .4s;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 15% 10%,color-mix(in srgb,var(--a) 22%,transparent),transparent),radial-gradient(50% 45% at 90% 90%,color-mix(in srgb,var(--b) 20%,transparent),transparent)}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;transition:opacity .5s}
+body.inapp #bg{opacity:.5}
+.wrap{position:relative;z-index:1}
+h1,h2,.brand{font-family:Rajdhani,sans-serif;margin:0;font-weight:700;letter-spacing:-.02em}
+.btn{appearance:none;border:0;cursor:pointer;font:600 1rem Rajdhani,sans-serif;color:var(--on);background:linear-gradient(135deg,var(--a),var(--b));padding:.9rem 1.6rem;border-radius:999px;text-decoration:none;display:inline-block;transition:transform .15s,filter .2s,box-shadow .2s;box-shadow:0 8px 30px -10px var(--a)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;filter:none}
+.btn.ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--line)}
+:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+/* landing */
+#landing{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:6rem 1.5rem 3rem;overflow:hidden}
+.hero{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#landing h1{font-size:clamp(2.6rem,10vw,5.5rem);line-height:1.05}
+#landing p{color:var(--mut);max-width:34ch;margin:1.2rem auto 2.2rem;font-size:1.1rem}
+#landing .btn{font-size:1.1rem;padding:1.05rem 2.2rem}
+.orbits{position:absolute;left:50%;top:50%;width:min(96vw,780px);aspect-ratio:1;transform:translate(-50%,-50%);z-index:1;pointer-events:none}
+.orbits i{position:absolute;inset:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--a) 35%,transparent);animation:spin 90s linear infinite}
+.orbits i:nth-child(2){inset:13%;border-style:dashed;animation-duration:60s;animation-direction:reverse}
+.orbits i:nth-child(3){inset:27%;border-color:color-mix(in srgb,var(--b) 40%,transparent);animation-duration:40s}
+.orbits i::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 14px 3px var(--a)}
+.orbits i:nth-child(2)::after{background:var(--b);box-shadow:0 0 14px 3px var(--b)}
+.fc{position:absolute;width:clamp(84px,13vw,150px);aspect-ratio:4/3;border-radius:14px;overflow:hidden;z-index:1;border:1px solid #fff3;box-shadow:0 18px 40px -16px #0008;background:radial-gradient(circle at 72% 30%,#fffb 0 11%,transparent 12%),linear-gradient(155deg,transparent 58%,#0004 58%),linear-gradient(135deg,var(--a),var(--b));animation:float 7s ease-in-out infinite}
+.fc::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);clip-path:inset(0 50% 0 0)}
+.fc::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff}
+.fc.a{left:8%;top:24%}.fc.b{right:9%;top:30%;animation-delay:-2s}.fc.c{left:14%;bottom:14%;animation-delay:-4s}.fc.d{right:15%;bottom:12%;animation-delay:-1s}
+@keyframes float{50%{transform:translateY(-14px) rotate(2deg)}}
+@media(max-width:700px){.fc{opacity:.55}.fc.a{left:-2%;top:17%}.fc.b{right:-2%;top:23%}.fc.c{left:2%;bottom:6%}.fc.d{right:2%;bottom:5%}}
+/* app */
+.nav{position:fixed;z-index:30;top:calc(12px + env(safe-area-inset-top,0px));left:0;right:0;margin:0 auto;width:calc(100% - 24px);max-width:980px}
+.pill,.tbar{background:color-mix(in srgb,var(--bg) 50%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid var(--line);border-radius:18px}
+.pill{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 .6rem 0 1.2rem}
+.brand{background:none;border:0;color:var(--fg);font-size:1.25rem;cursor:pointer;padding:0}
+.tbtn{display:flex;align-items:center;gap:.5rem;cursor:pointer;font:600 .88rem Rajdhani,sans-serif;color:var(--fg);background:color-mix(in srgb,var(--bg2) 70%,transparent);border:1.5px solid var(--line);border-radius:12px;padding:.45rem .8rem}
+.tbtn i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b))}
+.tbtn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s}
+.tbtn[aria-expanded=true] svg{transform:rotate(180deg)}
+.tbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:8px;padding:.7rem;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .22s,transform .22s,visibility .22s}
+.tbar.open{opacity:1;visibility:visible;transform:none}
+.t{appearance:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;font:600 .85rem Rajdhani,sans-serif;color:var(--mut);background:color-mix(in srgb,var(--bg2) 80%,transparent);border:1.5px solid var(--line);border-radius:999px;padding:.4rem .85rem .4rem .55rem;transition:.2s}
+.t i{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px #8884}
+.t.on{color:var(--fg);border-color:var(--a)}
+main{max-width:860px;margin:0 auto;padding:6.5rem clamp(1rem,4vw,2rem) 3rem}
+.stage{position:relative}
+.drop{display:grid;place-items:center;min-height:320px;border:2px dashed var(--line);border-radius:20px;background:color-mix(in srgb,var(--bg2) 75%,transparent);cursor:pointer;transition:border-color .2s,background .2s;overflow:hidden;text-align:center;padding:1.5rem}
+.drop:hover,.drop.over{border-color:var(--a)}
+.drop.has{border-style:solid;padding:.6rem}
+.drop svg{width:52px;height:52px;stroke:var(--a);fill:none;stroke-width:1.6}
+.drop strong{display:block;font-size:1.2rem;margin-top:.6rem}
+.drop small{color:var(--mut)}
+#prev{max-width:100%;max-height:62vh;border-radius:14px;display:block}
+.row{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:center;margin-top:1.4rem}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:999px;padding:3px}
+.seg button{appearance:none;border:0;background:none;color:var(--mut);font:600 .95rem Rajdhani,sans-serif;padding:.5rem 1.1rem;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--bg2);color:var(--fg);box-shadow:0 0 0 1.5px var(--a)}
+#msg{text-align:center;color:var(--mut);font-size:.92rem;min-height:1.4em;margin:.9rem 0 0}
+/* loading */
+.load{position:absolute;inset:0;border-radius:20px;overflow:hidden;background:var(--bg2)}
+.load canvas{position:absolute;inset:0;width:100%;height:100%}
+.load .mesh{position:absolute;inset:-30%;background:radial-gradient(circle at 30% 30%,var(--a),transparent 38%),radial-gradient(circle at 72% 62%,var(--b),transparent 40%);filter:blur(28px);opacity:.35;mix-blend-mode:screen;animation:drift 4.5s ease-in-out infinite alternate}
+.load .scan{position:absolute;left:0;right:0;height:38%;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--a) 50%,transparent),transparent);animation:scan 1.9s cubic-bezier(.6,0,.4,1) infinite}
+.spk{position:absolute;inset:0;pointer-events:none}
+.spk i{position:absolute;bottom:-10px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 2px var(--a);animation:rise 3.5s linear infinite}
+.chip{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:min(360px,90%);padding:.85rem 1rem;border-radius:16px;background:color-mix(in srgb,var(--bg) 68%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.chip .top{display:flex;align-items:center;gap:.9rem}
+.pct{font:700 1.5rem Rajdhani,sans-serif;min-width:3.8ch}
+.chip b{display:block;font-weight:600;line-height:1.2}
+.chip small{display:block;color:var(--mut);line-height:1.3;margin-top:.15rem;font-size:.8rem}
+.bar{height:5px;border-radius:9px;background:var(--line);margin-top:.75rem;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .3s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scan{0%{top:-40%}100%{top:105%}}
+@keyframes drift{to{transform:translate(8%,-6%) rotate(20deg) scale(1.15)}}
+@keyframes rise{to{transform:translateY(-380px) scale(.3);opacity:0}}
+/* compare */
+.cmp{--p:50%;position:relative;width:100%;max-height:72vh;border-radius:20px;overflow:hidden;user-select:none;touch-action:pan-y;cursor:ew-resize;background:var(--bg2);box-shadow:0 0 0 1.5px var(--line)}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
+.cmp .before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.hd{position:absolute;top:0;bottom:0;left:var(--p);width:3px;background:#fff;transform:translateX(-50%);box-shadow:0 0 12px #0008}
+.hd::after{content:"\2039  \203A";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#fff;color:#222;display:grid;place-items:center;font:700 1.3rem/1 Rajdhani;white-space:pre;box-shadow:0 4px 16px #0006}
+.tag{position:absolute;top:12px;padding:.2rem .7rem;border-radius:999px;font:600 .8rem Rajdhani;background:#000a;color:#fff}
+.tag.l{left:12px}.tag.r{right:12px}
+/* info */
+.info{margin-top:3rem;padding:1.6rem;border-radius:20px;background:color-mix(in srgb,var(--bg2) 80%,transparent);border:1px solid var(--line)}
+.info h2{font-size:1.2rem;margin-bottom:.6rem}
+.info p{margin:.4rem 0;color:var(--mut);max-width:62ch}
+.support{text-align:center;margin-top:2rem}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<meta name="theme-color" content="#F1EDE3">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DyyMovie">
+<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="wrap">
+
+<nav class="nav">
+  <div class="pill">
+    <button class="brand" id="home" title="Kembali ke beranda">DyyUpscale</button>
+    <button class="tbtn" id="tbtn" aria-expanded="false" aria-controls="tbar"><i></i><span id="tname">Dark</span><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+  </div>
+  <div class="tbar" id="tbar" role="group" aria-label="Pilih tema">
+    <button class="t" data-t="dark"><i style="background:#6ea8ff"></i>Dark</button>
+    <button class="t" data-t="sea"><i style="background:#22d3ee"></i>Sea</button>
+    <button class="t" data-t="light"><i style="background:#fff"></i>Light</button>
+    <button class="t" data-t="purple"><i style="background:#c084fc"></i>Purple</button>
+    <button class="t" data-t="gold"><i style="background:#f5c04a"></i>Gold</button>
+    <button class="t" data-t="star"><i style="background:#cfd8ff"></i>Star</button>
+  </div>
+</nav>
+
+<section id="landing">
+  <div class="orbits"><i></i><i></i><i></i></div>
+  <div class="fc a"></div><div class="fc b"></div><div class="fc c"></div><div class="fc d"></div>
+  <div class="hero">
+    <h1>DyyUpscale</h1>
+    <p>Perbesar resolusi gambar dan pertajam detailnya dalam beberapa detik.</p>
+    <button class="btn" id="start">Mulai Upscale Image</button>
+  </div>
+</section>
+
+<section id="app" hidden>
+  <main>
+    <div class="stage" id="stage">
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept="image/*" hidden>
+        <div id="ph">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg>
+          <strong>Seret atau pilih gambar</strong>
+          <small>JPG, PNG, atau WebP, maksimal 10 MB</small>
+        </div>
+        <img id="prev" alt="Gambar yang dipilih" hidden>
+      </label>
+      <div class="load" id="load" hidden>
+        <canvas id="pix"></canvas><div class="mesh"></div><div class="scan"></div><div class="spk" id="spk"></div>
+        <div class="chip" role="status"><div class="top"><div class="pct" id="pct">0%</div><div><b id="stat">Membaca gambar</b><small id="tip"></small></div></div><div class="bar"><i id="prog"></i></div></div>
+      </div>
+      <div class="cmp" id="cmp" hidden>
+        <img id="imgA" alt="Sesudah upscale">
+        <div class="before"><img id="imgB" alt="Sebelum upscale"></div>
+        <span class="tag l">Sebelum</span><span class="tag r">Sesudah</span>
+        <div class="hd" id="hd" role="slider" tabindex="0" aria-label="Geser untuk membandingkan" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
+      </div>
+    </div>
+
+    <div class="row" id="ctl">
+      <div class="seg" id="seg" role="group" aria-label="Perbesaran"><button data-s="2" class="on">2×</button><button data-s="4">4×</button></div>
+      <button class="btn" id="go" disabled>Mulai Upscale</button>
+      <button class="btn" id="dl" hidden>Unduh hasil</button>
+      <button class="btn ghost" id="again" hidden>Gambar lain</button>
+    </div>
+    <p id="msg" role="status"></p>
+
+    <div class="info">
+      <h2>Tentang DyyUpscale</h2>
+      <p>DyyUpscale memperbesar resolusi foto dan mempertajam detailnya. Unggah gambar JPG, PNG, atau WebP, pilih perbesaran 2× atau 4×, lalu tekan Mulai Upscale.</p>
+      <p>Setelah selesai, geser garis di tengah gambar untuk membandingkan hasil sebelum dan sesudah. Gambar dikirim ke server upscaler untuk diproses.</p>
+    </div>
+  </main>
+</section>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const API='https://api.jhx.my.id/hd-image';
+let file=null,scale=2,srcURL='';
+
+/* tema */
+function setTheme(t){
+  document.documentElement.dataset.theme=t;
+  document.querySelectorAll('.t').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#tname').textContent=t[0].toUpperCase()+t.slice(1);
+  try{localStorage.setItem('fu-theme',t)}catch(e){}
+  readColors();
+}
+document.querySelectorAll('.t').forEach(b=>b.onclick=()=>{setTheme(b.dataset.t);tog(false)});
+
+/* latar grafik */
+const cv=$('#bg'),cx=cv.getContext('2d');
+let W,H,stars=[],nodes=[],shoots=[],nextShoot=1200,c1=[110,168,255],c2=[183,140,255];
+const rgb=h=>{h=h.trim().replace('#','');if(h.length===3)h=h.split('').map(x=>x+x).join('');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+function readColors(){const s=getComputedStyle(document.documentElement);c1=rgb(s.getPropertyValue('--a'));c2=rgb(s.getPropertyValue('--b'))}
+function size(){
+  const d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+  stars=Array.from({length:Math.round(W*H/6500)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,p:Math.random()*6,s:Math.random()*.0016+.0006}));
+  nodes=Array.from({length:Math.min(Math.round(W*H/24000),50)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1.4}));
+}
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function frame(t){
+  cx.clearRect(0,0,W,H);
+  const th=document.documentElement.dataset.theme,light=th==='light',sc=light?c1:[255,255,255];
+  for(const s of stars){
+    s.x+=s.vx;s.y+=s.vy;if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;
+    cx.fillStyle=`rgba(${sc},${(.25+.7*Math.abs(Math.sin(t*s.s+s.p)))*(light?.55:1)})`;cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();
+  }
+  for(const p of nodes){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1}
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+    const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
+    if(d<160){cx.strokeStyle=`rgba(${c1},${(1-d/160)*.3})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(nodes[i].x,nodes[i].y);cx.lineTo(nodes[j].x,nodes[j].y);cx.stroke()}
+  }
+  for(const p of nodes){cx.fillStyle=`rgba(${c2},.15)`;cx.beginPath();cx.arc(p.x,p.y,p.r*4,0,7);cx.fill();cx.fillStyle=`rgba(${c2},.9)`;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
+  if(!still){
+    if(t>nextShoot){const v=7+Math.random()*4;shoots.push({x:W*(.3+Math.random()*.8),y:-10+Math.random()*H*.35,vx:-v,vy:v*.5,life:75});nextShoot=t+(th==='star'?1300:2800)+Math.random()*3500}
+    shoots=shoots.filter(s=>s.life>0&&s.x>-200&&s.y<H+200);
+    for(const s of shoots){
+      s.x+=s.vx;s.y+=s.vy;s.life--;
+      const a=Math.min(1,s.life/25),tx=s.x-s.vx*11,ty=s.y-s.vy*11,g=cx.createLinearGradient(s.x,s.y,tx,ty);
+      g.addColorStop(0,`rgba(${sc},${a})`);g.addColorStop(1,`rgba(${sc},0)`);
+      cx.strokeStyle=g;cx.lineWidth=1.8;cx.lineCap='round';cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(tx,ty);cx.stroke();
+      cx.fillStyle=`rgba(${sc},${a})`;cx.beginPath();cx.arc(s.x,s.y,1.8,0,7);cx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+}
+addEventListener('resize',size);
+
+/* navigasi */
+const tbtn=$('#tbtn'),tbar=$('#tbar');
+const tog=o=>{tbar.classList.toggle('open',o);tbtn.setAttribute('aria-expanded',o)};
+tbtn.onclick=e=>{e.stopPropagation();tog(!tbar.classList.contains('open'))};
+document.addEventListener('click',e=>{if(!tbar.contains(e.target))tog(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')tog(false)});
+$('#start').onclick=()=>{$('#landing').hidden=true;$('#app').hidden=false;document.body.classList.add('inapp');scrollTo(0,0)};
+$('#home').onclick=()=>{$('#app').hidden=true;$('#landing').hidden=false;document.body.classList.remove('inapp')};
+
+/* pilih gambar */
+const drop=$('#drop'),prev=$('#prev'),go=$('#go'),msg=t=>$('#msg').textContent=t||'';
+function pick(f){
+  if(!f||!f.type.startsWith('image/'))return msg('Pilih file gambar (JPG, PNG, atau WebP).');
+  if(f.size>10*1024*1024)return msg('Ukuran gambar maksimal 10 MB.');
+  msg();file=f;srcURL=URL.createObjectURL(f);prev.src=srcURL;
+  prev.hidden=false;$('#ph').hidden=true;drop.classList.add('has');go.disabled=false;
+}
+$('#file').onchange=e=>pick(e.target.files[0]);
+['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',e=>pick(e.dataTransfer.files[0]));
+$('#seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;scale=+b.dataset.s;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x===b))};
+
+/* proses */
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function findImg(o,ct){
+  if(typeof o==='string'){
+    if(/^data:image\//.test(o)||(/^https?:\/\/\S+$/i.test(o)&&!/whatsapp\.com/.test(o)))return o;
+    if(o.length>500&&/^[A-Za-z0-9+/=\s]+$/.test(o))return'data:'+ct+';base64,'+o.replace(/\s/g,'');
+    return null;
+  }
+  if(o&&typeof o==='object')for(const k in o){if(/^(creator|saluran|developer)$/i.test(k))continue;const r=findImg(o[k],ct);if(r)return r}
+  return null;
+}
+const probe=s=>new Promise((res,rej)=>{const i=new Image();i.onload=res;i.onerror=rej;i.src=s});
+async function viaAPI(f,s){
+  const url=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)});
+  const ct=f.type||'image/jpeg',ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),90000);
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({b64:url.split(',')[1],ct,scale:String(s)}),signal:ctl.signal});
+    const j=await r.json();
+    if(!j.Status)throw new Error(j.error||'Gagal memproses gambar.');
+    const src=findImg(j,ct);if(!src)throw new Error('Respons tidak berisi gambar.');
+    await probe(src);return src;
+  }finally{clearTimeout(to)}
+}
+function sharpen(g,w,h,a){
+  const im=g.getImageData(0,0,w,h),d=im.data,o=new Uint8ClampedArray(d);
+  for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=(y*w+x)*4;for(let c=0;c<3;c++){const j=i+c,v=5*o[j]-o[j-4]-o[j+4]-o[j-w*4]-o[j+w*4];d[j]=o[j]+(v-o[j])*a}}
+  g.putImageData(im,0,0);
+}
+async function viaLocal(img,s){
+  const w0=img.naturalWidth,h0=img.naturalHeight,k=Math.max(1,Math.min(s,4096/Math.max(w0,h0)));
+  const w=Math.round(w0*k),h=Math.round(h0*k),c=document.createElement('canvas');c.width=w;c.height=h;
+  const g=c.getContext('2d');g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(img,0,0,w,h);
+  if(w*h<=8e6)sharpen(g,w,h,.55);
+  return new Promise((res,rej)=>c.toBlob(b=>b?res(URL.createObjectURL(b)):rej(new Error('canvas')),'image/png'));
+}
+let timer;
+const tips=['Geser garis di hasil untuk melihat perbedaannya.','Pilih 4× kalau butuh ukuran paling besar.','Foto beresolusi kecil paling terasa hasilnya.','Tema bisa diganti kapan saja lewat navbar.'],
+  steps=['Membaca gambar','Menganalisis detail','Menajamkan tekstur','Merapikan warna','Finishing'],
+  pix=$('#pix'),pg=pix.getContext('2d'),off=document.createElement('canvas'),og=off.getContext('2d');
+let lastPs=0;
+function drawPix(ps){
+  const L=$('#load'),w=L.clientWidth,h=L.clientHeight;
+  if(pix.width!==w||pix.height!==h){pix.width=w;pix.height=h}
+  const sw=Math.max(1,Math.ceil(w/ps)),sh=Math.max(1,Math.ceil(h/ps));off.width=sw;off.height=sh;
+  const ir=prev.naturalWidth/prev.naturalHeight,cr=w/h;let dw,dh;
+  if(ir>cr){dh=sh;dw=sh*ir}else{dw=sw;dh=sw/ir}
+  og.drawImage(prev,(sw-dw)/2,(sh-dh)/2,dw,dh);
+  pg.imageSmoothingEnabled=false;pg.drawImage(off,0,0,sw,sh,0,0,sw*ps,sh*ps);
+}
+function busy(on){
+  $('#load').hidden=!on;go.disabled=on;clearInterval(timer);
+  if(!on)return;
+  const sp=$('#spk');
+  if(!sp.children.length)for(let i=0;i<16;i++){const e=document.createElement('i');e.style.cssText=`left:${Math.random()*100}%;animation-delay:-${Math.random()*4}s;animation-duration:${2.5+Math.random()*2.5}s`;sp.appendChild(e)}
+  const t0=performance.now();let tn=-1;lastPs=0;
+  const tick=()=>{
+    const t=performance.now()-t0,p=94*(1-Math.exp(-t/7000)),ps=Math.max(2,Math.round(2+38*Math.pow(1-p/94,1.4)));
+    $('#pct').textContent=Math.round(p)+'%';$('#prog').style.width=p+'%';$('#stat').textContent=steps[Math.min(4,Math.floor(p/19))];
+    if(ps!==lastPs){lastPs=ps;drawPix(ps)}
+    const k=Math.floor(t/3200)%tips.length;if(k!==tn){tn=k;$('#tip').textContent=tips[k]}
+  };
+  tick();timer=setInterval(tick,100);
+}
+async function finish(){clearInterval(timer);$('#pct').textContent='100%';$('#prog').style.width='100%';$('#stat').textContent='Selesai';drawPix(1);await sleep(500)}
+function reveal(a){
+  $('#imgA').src=a;$('#imgB').src=srcURL;
+  const c=$('#cmp');c.style.aspectRatio=prev.naturalWidth+'/'+prev.naturalHeight;
+  drop.hidden=true;c.hidden=false;go.hidden=true;$('#seg').hidden=true;$('#dl').hidden=false;$('#again').hidden=false;
+  const t0=performance.now();(function s(t){const k=Math.min((t-t0)/900,1),e=1-Math.pow(1-k,3);setP(c,95-45*e);if(k<1)requestAnimationFrame(s)})(t0);
+}
+go.onclick=async()=>{
+  if(!file)return;msg();busy(true);let src,note='';
+  const work=(async()=>{
+    try{src=await viaAPI(file,scale)}
+    catch(e){try{src=await viaLocal(prev,scale);note='Server upscaler tidak bisa dijangkau dari browser, jadi gambar diperbesar secara lokal.'}catch(e2){src=null}}
+  })();
+  await Promise.all([work,sleep(3400)]);
+  await finish();busy(false);
+  if(!src)return msg('Gagal memproses gambar. Coba gambar lain.');
+  reveal(src);msg(note);
+};
+$('#dl').onclick=async()=>{
+  const s=$('#imgA').src;
+  try{const b=await(await fetch(s)).blob(),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='dyyupscale-'+file.name.replace(/\.[^.]+$/,'')+'.'+(b.type.split('/')[1]||'png');a.click()}
+  catch(e){open(s,'_blank')}
+};
+$('#again').onclick=()=>{
+  file=null;$('#file').value='';prev.hidden=true;$('#ph').hidden=false;drop.classList.remove('has');drop.hidden=false;
+  $('#cmp').hidden=true;go.hidden=false;go.disabled=true;$('#seg').hidden=false;$('#dl').hidden=true;$('#again').hidden=true;msg();
+};
+
+/* slider before/after */
+const cmp=$('#cmp'),hd=$('#hd');let drag=false;
+function setP(c,p){p=Math.min(100,Math.max(0,p));c.style.setProperty('--p',p+'%');hd.setAttribute('aria-valuenow',Math.round(p))}
+const fromX=x=>{const r=cmp.getBoundingClientRect();setP(cmp,(x-r.left)/r.width*100)};
+cmp.addEventListener('pointerdown',e=>{drag=true;cmp.setPointerCapture(e.pointerId);fromX(e.clientX)});
+cmp.addEventListener('pointermove',e=>{if(drag)fromX(e.clientX)});
+['pointerup','pointercancel'].forEach(n=>cmp.addEventListener(n,()=>drag=false));
+hd.addEventListener('keydown',e=>{const v=parseFloat(getComputedStyle(cmp).getPropertyValue('--p'))||50;if(e.key==='ArrowLeft')setP(cmp,v-4);if(e.key==='ArrowRight')setP(cmp,v+4)});
+
+/* init */
+let saved;try{saved=localStorage.getItem('fu-theme')}catch(e){}
+size();setTheme(saved&&document.querySelector(`.t[data-t=${saved}]`)?saved:'dark');requestAnimationFrame(frame);
+</script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>

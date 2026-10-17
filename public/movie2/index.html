@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F1EDE3">
+<title>DyyMovie2 — Nonton Film & Series</title>
+<meta name="description" content="DyyMovie2: nonton film dan series terbaru, trending, populer, dan top rated.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2b33d'/%3E%3Cpath d='M24 18l24 14-24 14z' fill='%230c0a08'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://image.tmdb.org" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/movie2/assets/style.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<link rel="stylesheet" href="/movie2/assets/notebook.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#/" aria-label="DyyMovie2 beranda">
+    <span class="brand-ticket" aria-hidden="true">▶</span>
+    <span class="brand-word">Dyy<em>Movie2</em></span>
+  </a>
+  <nav class="tabs" id="typeTabs" aria-label="Jenis tayangan">
+    <button data-type="all" class="active">Semua</button>
+    <button data-type="movie">Film</button>
+    <button data-type="tv">Series</button>
+  </nav>
+  <form class="search" id="searchForm" role="search">
+    <input id="searchInput" type="search" placeholder="Cari film atau series…" autocomplete="off" aria-label="Cari film atau series">
+    <button type="submit" aria-label="Cari">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
+  </form>
+</header>
+
+<main id="view" tabindex="-1"></main>
+
+<footer class="footer">
+  <span>DyyMovie2</span>
+  <span>Data film dari dyymovie server · Video diputar dari server pihak ketiga.</span>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/movie2/assets/app.js?v=3" defer></script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>
