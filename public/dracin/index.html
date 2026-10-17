@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DyyRacin — Nonton Dracin & Drama Pendek</title>
+<meta name="description" content="Nonton drama China (dracin) dan drama pendek subtitle Indonesia. Trending, rekomendasi, dan pencarian judul.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<meta name="theme-color" content="#F1EDE3">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DyyMovie">
+<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a href="#/" class="brand" data-nav>
+    <span class="brand-mark">識</span>
+    <span class="brand-word">DyyRacin</span>
+  </a>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab is-active" data-tab="trending">Trending</button>
+    <button class="tab" data-tab="foryou">Untukmu</button>
+    <button class="tab" data-tab="recommended">Rekomendasi</button>
+  </nav>
+
+  <form class="searchbar" id="searchForm" role="search">
+    <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="searchInput" placeholder="Cari judul drama…" autocomplete="off" aria-label="Cari drama">
+  </form>
+</header>
+
+<main id="app" class="app">
+  <!-- views are rendered here by app.js -->
+</main>
+
+<footer class="site-footer">
+  <p>Data drama disediakan oleh API pihak ketiga (source: melolo). Judul, sinopsis, dan video adalah milik masing‑masing penerbit.</p>
+</footer>
+
+<!-- Watch overlay -->
+<div class="player-overlay" id="playerOverlay" hidden>
+  <div class="player-shell">
+    <div class="player-head">
+      <button class="icon-btn" id="playerClose" aria-label="Tutup pemutar">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="player-titles">
+        <span class="player-title" id="playerTitle">—</span>
+        <span class="player-ep" id="playerEpLabel">Episode 1</span>
+      </div>
+      <div class="player-nav">
+        <button class="icon-btn" id="playerPrev" aria-label="Episode sebelumnya">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="icon-btn" id="playerNext" aria-label="Episode berikutnya">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="video-wrap" id="videoWrap">
+      <video id="videoEl" playsinline controls></video>
+      <div class="video-state" id="videoState"></div>
+    </div>
+
+    <div class="episode-rail" id="episodeRail" aria-label="Daftar episode"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js"></script>
+<script src="app.js"></script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>

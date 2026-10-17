@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DyyDownloader — TikTok &amp; Instagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--tx:#f6f1ff;--mu:#b9acd6;--gl:rgba(255,255,255,.08);--bd:rgba(255,255,255,.16);--p:#c9a7ff;--k:#ff9ecf;--c:#8fe3ff;--er:#ff8fa3}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Poppins,system-ui,sans-serif;color:var(--tx);line-height:1.55;min-height:100vh;
+background:radial-gradient(1200px 600px at 10% -10%,#4b2a7a 0,transparent 60%),radial-gradient(900px 600px at 100% 10%,#7a2a62 0,transparent 55%),radial-gradient(900px 700px at 50% 120%,#1f3d7a 0,transparent 60%),#120d22;background-attachment:fixed}
+.blob{will-change:transform;position:fixed;border-radius:50%;filter:blur(70px);opacity:.35;z-index:0;pointer-events:none;animation:fl 14s ease-in-out infinite alternate}
+.b1{width:280px;height:280px;background:var(--k);top:8%;left:-60px}
+.b2{width:320px;height:320px;background:var(--c);bottom:5%;right:-80px;animation-delay:-6s}
+@keyframes fl{to{transform:translate(40px,-30px) scale(1.12)}}
+.w{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:36px 16px 70px}
+h1{font-family:'Playfair Display',serif;font-style:italic;text-align:center;font-size:clamp(2rem,6vw,3rem);margin:0;
+background:linear-gradient(90deg,var(--p),var(--k),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{text-align:center;color:var(--mu);margin:6px 0 26px;font-size:.95rem}
+.glass{background:var(--gl);border:1px solid var(--bd);border-radius:22px;padding:18px;margin-bottom:18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.chip{font-size:.75rem;padding:4px 12px;border-radius:99px;border:1px solid var(--bd);color:var(--mu);transition:.25s}
+.chip.on{background:linear-gradient(90deg,var(--p),var(--k));color:#2a1646;border-color:transparent;font-weight:600}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1;min-width:210px;padding:14px 18px;border-radius:99px;border:1px solid var(--bd);background:rgba(0,0,0,.25);color:var(--tx);font:inherit;outline:0}
+input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(201,167,255,.25)}
+input::placeholder{color:#8e80ab}
+.go,.btn{border:0;border-radius:99px;padding:13px 24px;font:inherit;font-weight:600;color:#2a1646;cursor:pointer;background:linear-gradient(90deg,var(--p),var(--k));transition:.2s;text-decoration:none;display:inline-block;text-align:center}
+.go:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,158,207,.35)}
+.go:disabled,.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.paste{background:transparent;color:var(--p);border:1px solid var(--bd)}
+.err{display:none;margin-top:12px;padding:10px 16px;border-radius:14px;background:rgba(255,143,163,.12);border:1px solid rgba(255,143,163,.4);color:var(--er);font-size:.9rem}
+.sp{display:none;text-align:center;padding:26px;color:var(--mu)}
+.dot{display:inline-block;width:10px;height:10px;margin:0 3px;border-radius:50%;background:var(--k);animation:b 1s infinite}
+.dot:nth-child(2){animation-delay:.15s;background:var(--p)}.dot:nth-child(3){animation-delay:.3s;background:var(--c)}
+@keyframes b{50%{transform:translateY(-10px)}}
+.top{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.cv{width:150px;aspect-ratio:3/4;object-fit:cover;border-radius:16px;background:#000;flex:none}
+.info{flex:1;min-width:220px}
+.badge{display:inline-block;font-size:.7rem;padding:2px 10px;border-radius:99px;background:linear-gradient(90deg,var(--c),var(--p));color:#1b1038;font-weight:600;margin-bottom:6px}
+.info h2{margin:0 0 8px;font-size:1.05rem;word-break:break-word}
+.who{display:flex;gap:10px;align-items:center;margin:8px 0}
+.av{width:46px;height:46px;border-radius:50%;object-fit:cover;background:rgba(255,255,255,.1);flex:none}
+.who b{display:block}.who span{color:var(--mu);font-size:.85rem}
+.lab{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--p);margin-top:10px}
+.bio{color:var(--mu);font-size:.9rem;white-space:pre-wrap;word-break:break-word;margin:2px 0}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.st{background:rgba(0,0,0,.22);border:1px solid var(--bd);border-radius:14px;padding:6px 14px;font-size:.75rem;color:var(--mu)}.st b{display:block;color:var(--tx);font-size:.95rem}
+h3{margin:0 0 12px;font-size:1rem;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.m{background:rgba(0,0,0,.22);border:1px solid var(--bd);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.m video,.m img{width:100%;max-height:300px;object-fit:contain;border-radius:12px;background:#000}
+.m audio{width:100%}
+.m .lb{font-size:.78rem;color:var(--mu);word-break:break-word}
+details summary{cursor:pointer;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:10px}
+td{padding:7px 8px;border-bottom:1px solid var(--bd);vertical-align:top;word-break:break-word}
+td:first-child{color:var(--mu);width:36%}
+.note{text-align:center;color:var(--mu);font-size:.75rem;margin-top:24px}
+</style>
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<meta name="theme-color" content="#F1EDE3">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DyyMovie">
+<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<div class="w">
+  <h1>DyyDownloader</h1>
+  <p class="sub">Unduh video, audio &amp; foto dari TikTok dan Instagram</p>
+
+  <div class="glass">
+    <div class="chips" id="chips"></div>
+    <div class="row">
+      <input id="u" type="url" placeholder="Tempel link TikTok atau Instagram..." autocomplete="off" inputmode="url">
+      <button class="go paste" id="ps" type="button">Tempel</button>
+      <button class="go" id="go" type="button">Download</button>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div class="sp" id="sp"><span class="dot"></span><span class="dot"></span><span class="dot"></span><p>Mengambil data...</p></div>
+  <div id="res"></div>
+  <p class="note">Gunakan hanya untuk konten milik sendiri atau yang diizinkan pemiliknya.</p>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(i){return document.getElementById(i)};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+var isUrl=function(s){return typeof s==="string"&&/^https?:\/\/[^\s]+$/i.test(s)};
+var fmt=function(n){var x=Number(n);return isNaN(x)?String(n):x.toLocaleString("id-ID")};
+var label=function(k){return String(k).replace(/\[(\d+)\]/g," #$1").replace(/[._]/g," ")};
+
+var PLAT=[["TikTok",/tiktok\.com/],["Instagram",/instagram\.com/]];
+function detect(u){var h="";try{h=new URL(u).hostname.toLowerCase()}catch(e){}for(var i=0;i<PLAT.length;i++)if(PLAT[i][1].test(h))return PLAT[i][0];return ""}
+function chips(active){$("chips").innerHTML=PLAT.map(function(p){return '<span class="chip'+(p[0]===active?' on':'')+'">'+p[0]+'</span>'}).join("")}
+chips("");
+$("u").addEventListener("input",function(){var v=$("u").value.trim();chips(isUrl(v)?detect(v):"")});
+$("u").addEventListener("keydown",function(e){if(e.key==="Enter")run()});
+$("go").onclick=run;
+$("ps").onclick=function(){
+  if(!navigator.clipboard||!navigator.clipboard.readText){showErr("Browser tidak mendukung tempel otomatis. Tempel manual ya.");return}
+  navigator.clipboard.readText().then(function(t){$("u").value=t.trim();$("u").dispatchEvent(new Event("input"))}).catch(function(){showErr("Izin clipboard ditolak. Tempel manual ya.")});
+};
+function showErr(m){var e=$("err");e.textContent=m;e.style.display=m?"block":"none"}
+
+function flatten(o,p,acc){
+  acc=acc||[];p=p||"";
+  if(o===null||o===undefined)return acc;
+  if(Array.isArray(o))o.forEach(function(v,i){flatten(v,p+"["+i+"]",acc)});
+  else if(typeof o==="object")Object.keys(o).forEach(function(k){flatten(o[k],p?p+"."+k:k,acc)});
+  else acc.push([p,o]);
+  return acc;
+}
+
+var VID=/\.(mp4|mov|webm|m3u8|mkv)$/,AUD=/\.(mp3|m4a|aac|wav|ogg|opus)$/,IMG=/\.(jpe?g|png|webp|gif|heic)$/;
+var THUMB=/thumb|cover|poster|preview|banner/,AVA=/avatar|profile_?pic|pp_?url|author_?(image|img|photo)|user_?(image|img|photo)/;
+
+// kumpulkan media dari setiap objek (menggunakan info saudara: type/quality/ext)
+function collect(o,path,out){
+  if(Array.isArray(o)){o.forEach(function(v,i){collect(v,path+"["+i+"]",out)});return}
+  if(!o||typeof o!=="object")return;
+  var ctx=[];
+  ["type","extension","ext","format","mime","mimetype","mime_type","kind"].forEach(function(k){if(typeof o[k]==="string")ctx.push(o[k])});
+  var q=[];
+  ["quality","resolution","label","size","bitrate","format_note","note"].forEach(function(k){if(o[k]!==undefined&&typeof o[k]!=="object")q.push(o[k])});
+  Object.keys(o).forEach(function(k){
+    var v=o[k],np=path?path+"."+k:path||k;
+    if(isUrl(v)){
+      var lk=k.toLowerCase();
+      if(AVA.test(lk)||AVA.test(path.toLowerCase())&&!/video|audio|download/.test(lk)){out.push({u:v,kind:"avatar",path:np});return}
+      if(THUMB.test(lk)){out.push({u:v,kind:"cover",path:np});return}
+      var low=v.toLowerCase().split("?")[0],kind=null;
+      if(AUD.test(low))kind="audio";else if(VID.test(low))kind="video";else if(IMG.test(low))kind="image";
+      var tx=(ctx.join(" ")+" "+lk).toLowerCase();
+      if(!kind){if(/\.mp4|video_?|\/v\/t\d|mime_type=video/.test(v.toLowerCase()))kind="video";else if(/\.(jpe?g|webp|png|heic)|\/t51\.|stp=/.test(v.toLowerCase()))kind="image"}
+      if(!kind){
+        if(/audio|mp3|m4a|music|sound/.test(tx))kind="audio";
+        else if(/video|mp4|webm|nowm|hd|sd|play/.test(tx))kind="video";
+        else if(/image|photo|jpg|jpeg|png|webp|pic/.test(tx))kind="image";
+      }
+      if(!kind){var pp=np.toLowerCase();kind=/audio|music/.test(pp)?"audio":/image|photo|slide|pic/.test(pp)?"image":"video"}
+      if(/^(url|link|download|download_url|downloadurl|src|href|video|audio|hd|sd|nowm|wm|mp3|mp4|music|play|hdplay|wmplay|image)$/i.test(k)||kind)
+        out.push({u:v,kind:kind,path:np,q:q.join(" · ")});
+    }else collect(v,np,out);
+  });
+}
+
+var cleanKey=function(p){return p.split(".").pop().replace(/\[\d+\]/g,"").toLowerCase()};
+function pick(flat,re,ctxRe){
+  for(var i=0;i<flat.length;i++){
+    var v=flat[i][1];
+    if(isUrl(v)||v===""||typeof v==="boolean")continue;
+    if(re.test(cleanKey(flat[i][0]))&&(!ctxRe||ctxRe.test(flat[i][0].toLowerCase())))return v;
+  }
+  return null;
+}
+
+function render(data,srcUrl,platName){
+  var flat=flatten(data),media=[];
+  collect(data,"",media);
+  var seen={},dl=[],avatar="",cover="";
+  media.forEach(function(m){
+    if(seen[m.u])return;seen[m.u]=1;
+    if(m.kind==="avatar"){avatar=avatar||m.u}else if(m.kind==="cover"){cover=cover||m.u}else dl.push(m);
+  });
+  // gambar yang sama dengan cover jangan dihitung unduhan jika video tersedia
+  var hasVid=dl.some(function(m){return m.kind==="video"});
+  if(hasVid)dl=dl.filter(function(m){return m.kind!=="image"||!/thumb|cover/.test(m.path.toLowerCase())});
+
+  var AUTH=/author|user|owner|channel|uploader|creator|account|profile|artist/;
+  var user=pick(flat,/^(unique_?id|username|user_?name|handle|author_?id|channel_?id|screen_?name)$/)||pick(flat,/^(author|uploader|owner|channel)$/);
+  var nick=pick(flat,/^(nickname|full_?name|display_?name|author_?name|uploader_?name|channel_?name|owner_?name)$/)||pick(flat,/^name$/,AUTH);
+  var bio=pick(flat,/^(bio|biography|signature|about|channel_?description|author_?bio|user_?bio)$/);
+  var title=pick(flat,/^(title|caption|desc|description|text)$/);
+  var plat=pick(flat,/^(platform|source|extractor|site)$/);
+  plat=platName||detect(srcUrl)||"Media";
+
+  var h='<div class="glass"><div class="top">';
+  if(cover)h+='<img class="cv" referrerpolicy="no-referrer" src="'+esc(cover)+'" alt="" onerror="this.style.display=\'none\'">';
+  h+='<div class="info"><span class="badge">'+esc(plat)+'</span>';
+  h+='<h2>'+esc(title||"Tanpa judul")+'</h2>';
+  h+='<div class="who">'+(avatar?'<img class="av" referrerpolicy="no-referrer" src="'+esc(avatar)+'" alt="" onerror="this.style.display=\'none\'">':'<div class="av"></div>')+
+     '<div><b>'+esc(nick||user||"Nama tidak tersedia")+'</b><span>'+(user?'@'+esc(String(user).replace(/^@/,"")):'Username tidak tersedia')+'</span></div></div>';
+  h+='<div class="lab">Bio</div><p class="bio">'+(bio?esc(bio):'Bio tidak tersedia dari sumber.')+'</p>';
+  var sh="";
+  [["followers?|follower_?count","Pengikut"],["following|following_?count","Mengikuti"],["like_?count|likes|digg_?count|like","Suka"],
+   ["comment_?count|comments","Komentar"],["play_?count|view_?count|views","Tayangan"],["share_?count|shares","Bagikan"],["duration|length","Durasi"]].forEach(function(s){
+    var v=pick(flat,new RegExp("^("+s[0]+")$","i"));
+    if(v!==null)sh+='<div class="st"><b>'+esc(fmt(v))+'</b>'+s[1]+'</div>';
+  });
+  if(sh)h+='<div class="stats">'+sh+'</div>';
+  h+='</div></div></div>';
+
+  h+='<div class="glass"><h3>Unduhan ('+dl.length+')</h3>';
+  if(!dl.length)h+='<p style="color:var(--mu)">Tidak ada tautan media pada respons. Pastikan link publik dan benar.</p>';
+  h+='<div class="grid">';
+  var n=0;
+  dl.forEach(function(m){
+    n++;
+    var ext=m.kind==="audio"?"mp3":m.kind==="image"?"jpg":"mp4";
+    var nm="aura_"+Date.now()+"_"+n+"."+ext;
+    var prev=m.kind==="video"?'<video controls preload="metadata" playsinline referrerpolicy="no-referrer"'+(cover?' poster="'+esc(cover)+'"':'')+' src="'+esc(m.u)+'"></video>'
+      :m.kind==="audio"?'<audio controls preload="none" src="'+esc(m.u)+'"></audio>'
+      :'<img referrerpolicy="no-referrer" loading="lazy" src="'+esc(m.u)+'" alt="">';
+    var tag=m.kind==="video"?"Video":m.kind==="audio"?"Audio":"Foto";
+    h+='<div class="m">'+prev+'<div class="lb">'+tag+(m.q?' · '+esc(m.q):'')+'</div>'+
+       '<button class="btn" data-u="'+esc(m.u)+'" data-n="'+esc(nm)+'">Download '+(m.kind==="audio"?"Audio":m.kind==="image"?"Foto":"Video")+'</button></div>';
+  });
+  h+='</div></div>';
+
+  var rows="";
+  flat.forEach(function(e){
+    if(isUrl(e[1])||e[1]==="")return;
+    rows+='<tr><td>'+esc(label(e[0]))+'</td><td>'+esc(typeof e[1]==="number"?fmt(e[1]):e[1])+'</td></tr>';
+  });
+  if(rows)h+='<div class="glass"><details><summary>Detail lengkap</summary><table>'+rows+'</table></details></div>';
+
+  $("res").innerHTML=h;
+  $("res").querySelectorAll("button.btn").forEach(function(b){b.onclick=function(){download(b,b.dataset.u,b.dataset.n)}});
+}
+
+function download(btn,url,name){
+  var old=btn.textContent;btn.textContent="Mengunduh...";btn.disabled=true;
+  fetch(url).then(function(r){if(!r.ok)throw new Error("x");return r.blob()}).then(function(b){
+    var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;
+    document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+  }).catch(function(){window.open(url,"_blank","noopener")})
+  .then(function(){btn.textContent=old;btn.disabled=false});
+}
+
+function run(){
+  var url=$("u").value.trim();showErr("");$("res").innerHTML="";
+  if(!url){showErr("Masukkan link terlebih dahulu.");return}
+  if(!/^https?:\/\//i.test(url))url="https://"+url;
+  if(!isUrl(url)){showErr("Link tidak valid.");return}
+  if(!detect(url)){showErr("Hanya link TikTok dan Instagram yang didukung.");return}
+  $("go").disabled=true;$("sp").style.display="block";
+  fetch("/api/dl?url="+encodeURIComponent(url))
+   .then(function(r){return r.text().then(function(t){
+      var j;try{j=JSON.parse(t)}catch(e){throw new Error("Server mengembalikan respons tidak valid.")}
+      if(!r.ok||j.error)throw new Error(j.error||"Terjadi kesalahan.");return j})})
+   .then(function(j){
+      var d=j.data;
+      if(d&&typeof d==="object"&&(d.status===false||d.success===false||d.ok===false))throw new Error(d.message||d.error||"API menolak permintaan. Pastikan link publik & benar.");
+      var core=d&&d.result!==undefined&&d.result!==null?d.result:(d&&d.data!==undefined&&d.data!==null?d.data:d);
+      render(core,url,j.platform);
+   })
+   .catch(function(e){showErr(e.message||"Gagal mengambil data.")})
+   .then(function(){$("go").disabled=false;$("sp").style.display="none"});
+}
+})();
+</script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>

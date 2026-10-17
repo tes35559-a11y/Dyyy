@@ -1,0 +1,122 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/downloader"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/downloader/*"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/movie/home"
+  to = "/home"
+  status = 301
+
+[[redirects]]
+  from = "/home"
+  to = "/movie-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/search"
+  to = "/movie-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/favorites"
+  to = "/movie-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/history"
+  to = "/movie-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/movie-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/anime/watch"
+  to = "/anime-watch.html"
+  status = 200
+
+[[redirects]]
+  from = "/anime/search"
+  to = "/anime.html"
+  status = 200
+
+[[redirects]]
+  from = "/anime"
+  to = "/anime.html"
+  status = 200
+
+[[redirects]]
+  from = "/play/*"
+  to = "/play.html"
+  status = 200
+
+[[redirects]]
+  from = "/movie/info-dev"
+  to = "/movie/info-dev.html"
+  status = 200
+
+[[redirects]]
+  from = "/komiku-api/*"
+  to = "https://api.synoxcloud.xyz/komik/komiku/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/komiku/*"
+  to = "https://komiku.org/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+
+# Menu, tema, dan halaman selalu dicek ulang ke server (ETag -> 304 jika tidak berubah), jadi cepat tapi tetap segar.
+# Aset menu memakai ?v=... sehingga cache-busting tetap aman.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<title>KomikKu - Baca Komik Online</title>
+<style>
+:root{--bg:#0f1115;--card:#1a1d24;--tx:#e8eaf0;--mut:#8b92a3;--ac:#ff4d6d;--bd:#2a2e38}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:10;background:#0f1115ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);padding:10px 16px}
+.top{display:flex;gap:12px;align-items:center}
+.logo{font-weight:800;font-size:20px;color:var(--ac);white-space:nowrap}
+header form{flex:1;display:flex;max-width:480px;margin-left:auto}
+input,select,button{font:inherit}
+header input{flex:1;padding:8px 12px;border-radius:8px 0 0 8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);min-width:0}
+.btn{display:inline-block;padding:8px 14px;border:0;background:var(--ac);color:#fff;border-radius:8px;cursor:pointer}
+.btn.alt{background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+.btn.off{pointer-events:none;opacity:.4}
+header form .btn{border-radius:0 8px 8px 0}
+nav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+nav a{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;border-radius:10px;background:var(--card);border:1px solid var(--bd);font-size:12px;white-space:nowrap;color:var(--mut);line-height:1.2}
+nav a i{font-style:normal;font-size:16px}
+nav a:hover{border-color:var(--ac);color:var(--tx)}
+nav a.on{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+@media(min-width:640px){nav{display:flex;justify-content:flex-start}nav a{flex-direction:row;gap:6px;padding:6px 14px;border-radius:99px;font-size:13px}}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h2{margin:18px 0 10px;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.card{background:var(--card);border-radius:10px;overflow:hidden;border:1px solid var(--bd);transition:transform .15s}
+.card:hover{transform:translateY(-3px)}
+.th{position:relative;aspect-ratio:16/11;background:#222}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:6px;bottom:6px;background:var(--ac);font-size:11px;padding:2px 7px;border-radius:5px}
+.type{position:absolute;right:6px;top:6px;background:#000b;font-size:11px;padding:2px 7px;border-radius:5px}
+.rk{position:absolute;left:6px;top:6px;background:#000b;color:#ffd166;font-weight:700;font-size:13px;padding:2px 8px;border-radius:5px}
+.ct{padding:8px}
+.ct b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.3}
+.ct small{color:var(--mut);font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:var(--card);border:1px solid var(--bd);padding:4px 10px;border-radius:99px;font-size:12px;color:var(--mut)}
+a.chip:hover,.chip.on{border-color:var(--ac);color:var(--tx)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tabs button{padding:6px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--mut);cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.pager{display:flex;justify-content:center;align-items:center;gap:12px;margin:22px 0}
+.detail{display:flex;gap:20px;flex-wrap:wrap}
+.detail img{width:240px;max-width:100%;border-radius:10px;object-fit:cover;background:#222;align-self:flex-start}
+.detail .info{flex:1;min-width:260px}
+.desc{color:var(--mut);line-height:1.6;margin:10px 0;white-space:pre-line}
+.chlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-top:10px}
+.chlist a{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);padding:8px 10px;border-radius:8px;font-size:14px;min-width:0}
+.chlist a:hover{border-color:var(--ac)}
+.chlist .no{flex:none;min-width:44px;text-align:center;background:var(--ac);color:#fff;font-weight:700;font-size:13px;padding:5px 8px;border-radius:6px}
+.chlist .tt{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.chlist small{display:block;color:var(--mut);font-size:12px}
+.chtools{display:flex;gap:8px;align-items:center;margin:10px 0 4px;flex-wrap:wrap}
+.chtools input{flex:1;min-width:180px;padding:9px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx)}
+.chtools input:focus{outline:0;border-color:var(--ac)}
+.chcount{color:var(--mut);font-size:13px;margin:4px 0}
+.sec-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:22px 0 10px}
+.sec-h h2{margin:0}
+.reader{max-width:800px;margin:0 auto}
+.reader img{width:100%;display:block;min-height:220px;background:#181a20}
+.rbar{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 0;flex-wrap:wrap}
+.state{text-align:center;color:var(--mut);padding:36px 10px}
+.note{background:#2a2530;border:1px solid var(--bd);padding:8px 12px;border-radius:8px;font-size:13px;color:var(--mut);margin:8px 0}
+.spin{width:34px;height:34px;border:4px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:s 1s linear infinite;margin:0 auto 10px}
+@keyframes s{to{transform:rotate(360deg)}}
+.sk{aspect-ratio:16/13;border-radius:10px;background:linear-gradient(90deg,#1a1d24,#262a33,#1a1d24);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+details{margin-top:14px;text-align:left;font-size:12px}
+pre{white-space:pre-wrap;word-break:break-all}
+</style>
+<style>
+/* DYYCOMIC: tema notebook yang sama dengan seluruh web.
+   Perbaikan: variabel warna --dyy-* sebelumnya tidak pernah didefinisikan sehingga teks dan tombol tidak terlihat. */
+:root{--dyy-text:#1d1b18;--dyy-muted:#5a5346;--dyy-line:#1d1b18;--dyy-card:#fffefb;--dyy-primary:#a3232b;--dyy-pink:#d9574f;--dyy-shadow:3px 4px 0 rgba(29,27,24,.16);
+--bg:#fcfbf7;--card:#fffefb;--tx:#1d1b18;--mut:#5a5346;--ac:#a3232b;--bd:#1d1b18}
+html,body{background:#fcfbf7!important}
+body{font-family:'Patrick Hand','Segoe UI',system-ui,-apple-system,sans-serif!important;font-size:17px;color:#1d1b18!important}
+header{background:#f1ede3!important;border-bottom:2px solid #1d1b18!important;box-shadow:0 3px 0 rgba(29,27,24,.16)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:12px 16px 10px 16px!important}
+.top{padding-left:56px;min-width:0}header form{min-width:0}nav{min-width:0}nav a{min-width:0}
+.logo{min-width:0}@media(max-width:380px){header .logo{font-size:21px!important;padding:0 6px!important}.top{gap:8px;padding-left:52px}header form .btn{padding:8px 10px}}
+.logo{font-family:'Caveat','Patrick Hand',cursive!important;font-size:28px!important;font-weight:700!important;color:#1d1b18!important;background:#fff27a;padding:0 10px;transform:rotate(-1deg);box-shadow:2px 3px 0 rgba(29,27,24,.16);text-shadow:none!important}
+header input,.chtools input{background:#fffefb!important;color:#1d1b18!important;border:1.8px solid #1d1b18!important;box-shadow:none!important}
+header input::placeholder,.chtools input::placeholder{color:#71695d!important;opacity:1}
+.btn{background:#fff27a!important;color:#1d1b18!important;border:1.8px solid #1d1b18!important;border-radius:8px!important;box-shadow:2px 3px 0 rgba(29,27,24,.16)!important}
+header form .btn{border-radius:0 8px 8px 0!important}
+.btn.alt,.tabs button,.chip,nav a{background:#fffefb!important;color:#1d1b18!important;border:1.8px solid #1d1b18!important;box-shadow:none!important}
+.chip{color:#5a5346!important}
+nav a.on,.tabs button.on,.chip.on,a.chip:hover,.btn:hover,nav a:hover,.tabs button:hover{background:#fff27a!important;color:#1d1b18!important}
+.badge,.chlist .no{background:#fff27a!important;color:#1d1b18!important;border:1.3px solid #1d1b18!important}
+.type,.rk{background:#fffefb!important;color:#1d1b18!important;border:1.3px solid #1d1b18!important}
+.card,.chlist a,.note{background:#fffefb!important;border:1.8px solid #1d1b18!important;color:#1d1b18!important;box-shadow:3px 4px 0 rgba(29,27,24,.16)!important;border-radius:8px!important;backdrop-filter:none!important}
+.card:hover,.chlist a:hover{transform:translate(-1px,-2px)!important;box-shadow:5px 6px 0 rgba(29,27,24,.16)!important}
+.ct small,.desc,.state,.chcount{color:#5a5346!important}
+.th{background:#f1ede3!important}
+.sk{background:linear-gradient(90deg,#eee9df 25%,#f8f5ee 37%,#eee9df 63%)!important;background-size:400% 100%!important}
+.spin{border-color:rgba(29,27,24,.15)!important;border-top-color:#a3232b!important}
+h1,h2{font-family:'Caveat','Patrick Hand',cursive!important;color:#1d1b18!important}
+h2{font-size:26px}
+.reader img{background:#eee9df}
+main{padding-top:18px!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><a class="logo" href="#/">DYYCOMIC</a>
+  <form id="sf"><input id="q" placeholder="Cari komik..." autocomplete="off"><button class="btn">Cari</button></form></div>
+  <nav id="nav"><a href="#/" data-k="home"><i aria-hidden="true"></i>Beranda</a><a href="#/list/latest/semua/1" data-k="latest"><i aria-hidden="true"></i>Terbaru</a><a href="#/list/rank/harian/1" data-k="rank"><i aria-hidden="true"></i>Ranking</a><a href="#/list/new-series/semua/1" data-k="new-series"><i aria-hidden="true"></i>Series Baru</a><a href="#/genres" data-k="genres"><i aria-hidden="true"></i>Genre</a></nav>
+</header>
+<main id="app"></main>
+
+<script>
+const KEY = 'FREE';
+const BASES = ['/komiku-api', 'https://api.synoxcloud.xyz/komik/komiku']; // proxy khusus DyyComic, lalu langsung
+const ORIGIN = 'https://komiku.org';
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const enc = encodeURIComponent;
+const PH = "data:image/svg+xml;utf8," + enc('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="220"><rect width="100%" height="100%" fill="#22252d"/><text x="50%" y="52%" fill="#6b7280" font-family="sans-serif" font-size="20" text-anchor="middle">No Image</text></svg>');
+
+// ---------- state ----------
+const cache = {}, imgByUrl = {}, chURL = {}, detCache = {}, learned = {};
+const slugOf = u => { try { const p = new URL(u, ORIGIN).pathname.split('/').filter(Boolean); return decodeURIComponent(p[p.length - 1] || ''); } catch (e) { return ''; } };
+const mangaUrl = s => (cache[s] && cache[s].url) || `${ORIGIN}/manga/${enc(s)}/`;
+const chapUrl = s => chURL[s] || `${ORIGIN}/${enc(s)}/`;
+const bigImg = u => (u || '').replace(/\?resize=.*$/, '');
+
+// ---------- API ----------
+const msgOf = j => (j && (j.message || j.error || j.error_message || (j.result && j.result.message))) || '';
+async function api(path, params = {}) {
+  const qs = new URLSearchParams({ ...params, apikey: KEY }).toString();
+  let lastErr;
+  for (const base of BASES) {
+    let r, txt;
+    try {
+      const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 30000);
+      r = await fetch(`${base}/${path}?${qs}`, { signal: ctrl.signal }); txt = await r.text(); clearTimeout(t);
+    } catch (e) { lastErr = e; continue; }
+    let j = null; try { j = JSON.parse(txt); } catch (e) {}
+    if (!j) { lastErr = new Error('Respons bukan JSON (HTTP ' + r.status + ')'); continue; }
+    if (!r.ok || j.status === false) { const e = new Error(msgOf(j) || ('HTTP ' + r.status)); e.body = txt.slice(0, 200); throw e; }
+    return j.result || j;
+  }
+  throw lastErr || new Error('Gagal terhubung ke API');
+}
+const firstArray = o => {
+  if (Array.isArray(o)) return o;
+  if (o && typeof o === 'object') { if (Array.isArray(o.data)) return o.data; for (const k in o) { const v = o[k]; if (Array.isArray(v) && v.length && typeof v[0] === 'object') return v; if (v && typeof v === 'object' && !Array.isArray(v)) { const f = firstArray(v); if (f) return f; } } }
+  return null;
+};
+const hasData = r => { if (!r) return false; const d = r.data !== undefined ? r.data : r; return Array.isArray(d) ? d.length > 0 : d && typeof d === 'object' && Object.keys(d).length > 0; };
+// coba beberapa pasangan [nama parameter, nilai] sampai berhasil
+async function apiPairs(path, pairs, extra = {}, key = path) {
+  const order = [...pairs]; const l = learned[key];
+  if (l) order.sort((a, b) => (b[0] === l) - (a[0] === l));
+  const tried = [];
+  for (const [n, v] of order) {
+    try { const r = await api(path, { [n]: v, ...extra }); if (hasData(r)) { learned[key] = n; return r; } tried.push(n + ': data kosong'); }
+    catch (e) { tried.push(`${n}: ${e.message}${e.body ? ' ' + e.body : ''}`); }
+  }
+  const e = new Error('Server API menolak permintaan'); e.tried = tried; throw e;
+}
+
+// ---------- normalisasi ----------
+function norm(o) {
+  if (!o || typeof o !== 'object') return null;
+  let url = o.url || o.link || o.href || (o.slug ? `${ORIGIN}/manga/${o.slug}/` : '');
+  if (!url) return null;
+  const m = {
+    title: String(o.title || o.name || slugOf(url).replace(/-/g, ' ')),
+    url, image: o.image || o.thumbnail || o.cover || o.img || o.poster || '',
+    type: o.type || '', chapter: o.chapter || o.latest_chapter || '', chapter_url: o.chapter_url || '',
+    sub: o.views || o.time || o.genre || '', rank: o.rank || ''
+  };
+  const s = slugOf(url); if (!s) return null;
+  if (m.image) imgByUrl[url] = m.image; else if (imgByUrl[url]) m.image = imgByUrl[url];
+  if (m.chapter_url) chURL[slugOf(m.chapter_url)] = m.chapter_url;
+  cache[s] = { ...(cache[s] || {}), ...m, image: m.image || (cache[s] && cache[s].image) || '' };
+  return m;
+}
+const list = r => (firstArray(r) || []).map(norm).filter(Boolean);
+
+// ---------- UI helpers ----------
+const loading = () => app.innerHTML = '<div class="state"><div class="spin"></div>Memuat...</div>';
+const sk = n => `<div class="grid">${'<div class="sk"></div>'.repeat(n)}</div>`;
+const imgTag = (src, alt = '') => `<img loading="lazy" referrerpolicy="no-referrer" src="${esc(src || PH)}" alt="${esc(alt)}" onerror="this.onerror=null;this.src='${PH}'">`;
+const fail = (msg, retry, tried) => {
+  app.innerHTML = `<div class="state">${esc(msg)}<br><br><button class="btn" id="rt">Coba lagi</button>${tried && tried.length ? `<details><summary>Detail teknis</summary><pre>${esc(tried.join('\n'))}</pre></details>` : ''}</div>`;
+  $('#rt').onclick = retry;
+};
+const card = m => { const s = slugOf(m.url); return `<a class="card" href="#/comic/${enc(s)}"><div class="th">${imgTag(m.image, m.title)}
+  ${m.rank ? `<span class="rk">#${esc(m.rank)}</span>` : ''}${m.type ? `<span class="type">${esc(m.type)}</span>` : ''}${m.chapter ? `<span class="badge">${esc(m.chapter)}</span>` : ''}</div>
+  <div class="ct"><b>${esc(m.title)}</b><small>${esc(m.sub)}</small></div></a>`; };
+const grid = items => items.length ? `<div class="grid">${items.map(card).join('')}</div>` : '<div class="state">Tidak ada komik.</div>';
+const pager = (page, hasNext, mk) => `<div class="pager"><a class="btn alt ${page <= 1 ? 'off' : ''}" href="${mk(page - 1)}">← Prev</a><span>Hal ${page}</span><a class="btn alt ${hasNext ? '' : 'off'}" href="${mk(page + 1)}">Next →</a></div>`;
+const tabs = (opts, cur, id) => `<div class="tabs" id="${id}">${opts.map(o => `<button data-v="${o}" class="${o === cur ? 'on' : ''}">${o}</button>`).join('')}</div>`;
+
+// ---------- sections (dipakai beranda & halaman daftar) ----------
+async function fetchKind(kind, type, page) {
+  const p = { page };
+  if (kind !== 'latest') p.type = type;
+  if (kind === 'rank') delete p.page;
+  return list(await api(kind, p));
+}
+function section(id, title, kind, types, defType, limit) {
+  return { id, title, kind, types, defType, limit };
+}
+async function fill(sec, type) {
+  const box = $('#c_' + sec.id); if (!box) return;
+  box.innerHTML = sk(6);
+  try { const items = await fetchKind(sec.kind, type, 1); if (!$('#c_' + sec.id)) return; box.innerHTML = grid(items.slice(0, sec.limit)); }
+  catch (e) { if ($('#c_' + sec.id)) box.innerHTML = `<div class="state">Gagal memuat (${esc(e.message)}) <br><br><button class="btn alt" onclick="location.reload()">Muat ulang</button></div>`; }
+}
+
+async function home() {
+  const secs = [
+    section('lt', 'Update Terbaru', 'latest', null, '', 12),
+    section('rk', 'Ranking', 'rank', ['harian', 'mingguan', 'bulanan'], 'harian', 12),
+    section('ns', 'Series Baru', 'new-series', ['semua', 'manga', 'manhwa', 'manhua'], 'semua', 12)
+  ];
+  const more = s => s.kind === 'rank' ? `#/list/rank/harian/1` : `#/list/${s.kind}/${s.defType || 'semua'}/1`;
+  app.innerHTML = secs.map(s => `<div class="sec-h"><h2>${s.title}</h2><a class="chip" href="${more(s)}">Lihat semua →</a></div>${s.types ? tabs(s.types, s.defType, 't_' + s.id) : ''}<div id="c_${s.id}"></div>`).join('');
+  // urutan: terbaru & series baru dulu agar thumbnail bisa dipakai oleh ranking
+  secs.forEach(s => {
+    if (s.types) $('#t_' + s.id).onclick = e => { const b = e.target.closest('button'); if (!b) return; [...$('#t_' + s.id).children].forEach(x => x.classList.toggle('on', x === b)); fill(s, b.dataset.v); };
+  });
+  await Promise.allSettled([fill(secs[0], ''), fill(secs[2], 'semua')]);
+  await fill(secs[1], 'harian');
+}
+
+async function listPage(kind, type, page) {
+  page = +page || 1;
+  const opts = kind === 'rank' ? ['harian', 'mingguan', 'bulanan'] : kind === 'latest' ? null : ['semua', 'manga', 'manhwa', 'manhua'];
+  const names = { latest: 'Update Terbaru', rank: 'Ranking', 'new-series': 'Series Baru' };
+  app.innerHTML = `<h2>${names[kind] || kind}</h2>${opts ? `<div class="tabs">${opts.map(o => `<a class="chip ${o === type ? 'on' : ''}" href="#/list/${kind}/${o}/1">${o}</a>`).join('')}</div>` : ''}<div id="res">${sk(12)}</div>`;
+  try {
+    const items = await fetchKind(kind, type, page);
+    $('#res').innerHTML = grid(items) + (kind === 'rank' ? '' : pager(page, items.length > 0, p => `#/list/${kind}/${type}/${p}`));
+  } catch (e) { fail('Gagal memuat daftar: ' + e.message, () => listPage(kind, type, page), e.tried); }
+}
+
+async function genresPage() {
+  loading();
+  try {
+    const r = await api('genre'); const g = firstArray(r) || [];
+    app.innerHTML = `<h2>Genre</h2><div class="chips">${g.map(x => `<a class="chip" href="#/genre/${enc(x.slug || x.name)}/1">${esc(x.name || x.slug)}${x.count ? ` (${esc(x.count)})` : ''}</a>`).join('')}</div>`;
+  } catch (e) { fail('Gagal memuat genre: ' + e.message, genresPage); }
+}
+async function genrePage(slug, page) {
+  page = +page || 1; app.innerHTML = `<h2>Genre: ${esc(slug)}</h2><div id="res">${sk(12)}</div>`;
+  try {
+    const items = list(await api('genre-detail', { genre: slug, page }));
+    $('#res').innerHTML = grid(items) + pager(page, items.length > 0, p => `#/genre/${enc(slug)}/${p}`);
+  } catch (e) { fail('Gagal memuat genre: ' + e.message, () => genrePage(slug, page), e.tried); }
+}
+
+async function searchPage(q, page) {
+  page = +page || 1; app.innerHTML = `<h2>🔎 Hasil: "${esc(q)}"</h2><div id="res">${sk(12)}</div>`;
+  let items = [], note = '';
+  try {
+    const r = await apiPairs('search', ['q', 'query', 'keyword', 's', 'search', 'title'].map(n => [n, q]), { page });
+    items = list(r);
+  } catch (e) {
+    // cadangan: cari di daftar yang tersedia
+    try {
+      if (Object.keys(cache).length < 30) await Promise.allSettled(['latest', 'new-series'].map(k => fetchKind(k, 'semua', 1)));
+      const t = q.toLowerCase();
+      items = Object.values(cache).filter(m => m.title && m.title.toLowerCase().includes(t));
+      note = '<div class="note">Pencarian server sedang tidak tersedia. Menampilkan hasil dari daftar komik yang sudah dimuat.</div>';
+    } catch (e2) { return fail('Pencarian gagal: ' + e.message, () => searchPage(q, page), e.tried); }
+  }
+  $('#res').innerHTML = note + grid(items) + (note ? '' : pager(page, items.length > 0, p => `#/search/${enc(q)}/${p}`));
+}
+
+// ---------- detail ----------
+function findChapters(o) {
+  const keys = ['chapters', 'chapter_list', 'chapterList', 'list_chapter', 'daftar_chapter', 'list'];
+  const isCh = a => Array.isArray(a) && a.length && a[0] && typeof a[0] === 'object' && (a[0].url || a[0].chapter_url || a[0].link);
+  if (o && typeof o === 'object') {
+    for (const k of keys) if (isCh(o[k])) return o[k];
+    for (const k in o) { const v = o[k]; if (isCh(v)) return v; if (v && typeof v === 'object' && !Array.isArray(v)) { const f = findChapters(v); if (f.length) return f; } }
+  }
+  return [];
+}
+const txt = v => v == null ? '' : Array.isArray(v) ? v.map(txt).join(', ') : typeof v === 'object' ? (v.name || v.title || '') : String(v);
+async function getDetail(slug) {
+  if (detCache[slug]) return detCache[slug];
+  const full = mangaUrl(slug);
+  const r = await apiPairs('detail', [['url', full], ['link', full], ['slug', slug], ['id', slug], ['manga_url', full]], {}, 'detail');
+  const d = r.data !== undefined ? r.data : r;
+  const chapters = findChapters(d).map(c => ({
+    title: txt(c.title || c.chapter || c.name || c.text) || slugOf(c.url || c.chapter_url || c.link).replace(/-/g, ' '),
+    url: c.url || c.chapter_url || c.link, date: txt(c.date || c.time || c.release || c.created)
+  })).filter(c => c.url);
+  chapters.forEach(c => chURL[slugOf(c.url)] = c.url);
+  return detCache[slug] = { d, chapters };
+}
+const chNum = t => { const m = String(t).match(/(\d+(?:\.\d+)?)/); return m ? parseFloat(m[1]) : NaN; };
+
+async function comicPage(slug) {
+  loading();
+  const m0 = cache[slug] || { title: slug.replace(/-/g, ' '), url: mangaUrl(slug) };
+  let det = null, err = null;
+  try { det = await getDetail(slug); } catch (e) { err = e; }
+  const d = (det && det.d && typeof det.d === 'object') ? det.d : {};
+  const title = txt(d.title) || m0.title, image = bigImg(txt(d.image || d.thumbnail || d.cover || d.poster)) || bigImg(m0.image);
+  if (image) imgByUrl[m0.url] = image;
+  const desc = txt(d.synopsis || d.description || d.sinopsis || d.desc);
+  const gen = d.genres || d.genre || [];
+  const chips = [txt(d.type || m0.type), txt(d.status), txt(d.author), txt(d.released || d.year)].filter(Boolean).map(x => `<span class="chip">${esc(x)}</span>`).join('')
+    + (Array.isArray(gen) ? gen : String(gen).split(',')).map(g => txt(g).trim()).filter(Boolean).map(g => `<span class="chip">${esc(g)}</span>`).join('');
+  app.innerHTML = `<div class="detail">${imgTag(image, title).replace('<img', '<img style="aspect-ratio:3/4"')}
+    <div class="info"><h1>${esc(title)}</h1><div class="chips">${chips}</div>
+    <p class="desc">${esc(desc || (err ? '' : 'Tidak ada deskripsi.'))}</p><div id="rb"></div></div></div>
+    <h2>Daftar Chapter</h2><div id="chs"></div>`;
+  const chs = det ? det.chapters : [];
+  if (chs.length) {
+    const nums = chs.map(c => chNum(c.title)).filter(n => !isNaN(n));
+    const descOrder = nums.length > 1 ? nums[0] > nums[nums.length - 1] : true;
+    const first = descOrder ? chs[chs.length - 1] : chs[0], last = descOrder ? chs[0] : chs[chs.length - 1];
+    $('#rb').innerHTML = `<a class="btn" href="#/read/${enc(slug)}/${enc(slugOf(first.url))}">▶ Mulai Baca</a> <a class="btn alt" href="#/read/${enc(slug)}/${enc(slugOf(last.url))}">Chapter Terbaru</a>`;
+    const items = chs.map((c, i) => { const n = chNum(c.title); const seq = descOrder ? chs.length - i : i + 1; return { ...c, seq, num: isNaN(n) ? seq : n, ttl: String(c.title || '') }; });
+    let sortDesc = true;
+    $('#chs').innerHTML = `<div class="chtools"><input id="cq" type="search" inputmode="search" autocomplete="off" placeholder="Cari chapter / nomor (mis. 25)..."><button class="btn alt" id="cs" type="button">↓ Terbaru</button></div><div class="chcount" id="cc"></div><div id="chl"></div>`;
+    const renderCh = () => {
+      const q = $('#cq').value.trim().toLowerCase(), qn = q.replace(/^0+(?=\d)/, '');
+      let arr = items.filter(c => !q || c.ttl.toLowerCase().includes(q) || String(c.num).startsWith(qn));
+      arr.sort((a, b) => {
+        if (q) { const ea = String(a.num) === qn ? 0 : 1, eb = String(b.num) === qn ? 0 : 1; if (ea !== eb) return ea - eb; }
+        return sortDesc ? b.seq - a.seq : a.seq - b.seq;
+      });
+      $('#cc').textContent = q ? `${arr.length} dari ${items.length} chapter` : `${items.length} chapter`;
+      $('#chl').innerHTML = arr.length
+        ? `<div class="chlist">${arr.map(c => `<a href="#/read/${enc(slug)}/${enc(slugOf(c.url))}"><span class="no">${esc(c.num)}</span><span class="tt">${esc(c.ttl)}${c.date ? `<small>${esc(c.date)}</small>` : ''}</span></a>`).join('')}</div>`
+        : `<div class="state">Chapter "${esc(q)}" tidak ditemukan.</div>`;
+      $('#cs').textContent = sortDesc ? '↓ Terbaru' : '↑ Terlama';
+      return arr;
+    };
+    $('#cq').oninput = renderCh;
+    $('#cq').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); const a = renderCh(); if (a.length) location.hash = `#/read/${enc(slug)}/${enc(slugOf(a[0].url))}`; } };
+    $('#cs').onclick = () => { sortDesc = !sortDesc; renderCh(); };
+    renderCh();
+  } else {
+    const cu = m0.chapter_url;
+    $('#rb').innerHTML = (cu ? `<a class="btn" href="#/read/${enc(slug)}/${enc(slugOf(cu))}">▶ Baca ${esc(m0.chapter || 'chapter terbaru')}</a> ` : '') + `<a class="btn alt" target="_blank" rel="noreferrer" href="${esc(m0.url)}">Buka di komiku.org</a>`;
+    $('#chs').innerHTML = `<div class="state">Daftar chapter tidak tersedia dari API${err ? ` (${esc(err.message)})` : ''}.<br><br><button class="btn alt" id="rt">Coba lagi</button>${err && err.tried ? `<details><summary>Detail teknis</summary><pre>${esc(err.tried.join('\n'))}</pre></details>` : ''}</div>`;
+    $('#rt').onclick = () => comicPage(slug);
+  }
+}
+
+// ---------- reader ----------
+function extractImages(data, skip) {
+  const IMG = /^https?:\/\/[^\s]+\.(jpe?g|png|webp|gif|avif)(\?[^\s]*)?$/i, out = [];
+  const walk = (o, forced) => {
+    if (typeof o === 'string') { if ((IMG.test(o) || (forced && /^https?:\/\//.test(o))) && !/logo|favicon|avatar/i.test(o)) out.push(o); return; }
+    if (Array.isArray(o)) { o.forEach(x => walk(x, forced)); return; }
+    if (o && typeof o === 'object') for (const k in o) walk(o[k], forced || /^(images?|pages?|imgs?|pictures?|panels?)$/i.test(k));
+  };
+  walk(data, false);
+  return [...new Set(out)].filter(u => bigImg(u) !== bigImg(skip || '#'));
+}
+const findLink = (o, re) => { if (o && typeof o === 'object') { for (const k in o) { if (re.test(k) && typeof o[k] === 'string' && o[k]) return o[k]; if (o[k] && typeof o[k] === 'object') { const f = findLink(o[k], re); if (f) return f; } } } return ''; };
+
+// ---------- pemuat gambar chapter (API + scraping cadangan, balapan siapa tercepat) ----------
+const chCache = {};
+const IMGRE = /\.(jpe?g|png|webp|gif|avif)(\?|#|$)/i;
+const BADIMG = /logo|favicon|avatar|icon|banner|sprite|loading|placeholder|\/ads?\//i;
+const fixImg = u => String(u).replace(/^http:\/\//i, 'https://');
+async function getText(url, ms = 20000) {
+  const c = new AbortController(), t = setTimeout(() => c.abort(), ms);
+  try { const r = await fetch(url, { signal: c.signal }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
+  finally { clearTimeout(t); }
+}
+function parseChapterHtml(html, base) {
+  let doc; try { doc = new DOMParser().parseFromString(html, 'text/html'); } catch (e) { return []; }
+  const pick = sel => [...doc.querySelectorAll(sel)];
+  const get = i => (i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('data-original') || i.getAttribute('src') || '').trim();
+  const abs = u => { try { return fixImg(new URL(u, base).href); } catch (e) { return ''; } };
+  let urls = pick('#Baca_Komik img, #baca_komik img, .baca-komik img, #chapter_area img, .reader-area img')
+    .map(get).filter(u => u && !u.startsWith('data:')).map(abs).filter(u => u && !BADIMG.test(u));
+  if (!urls.length) {
+    const g = pick('img').map(get).map(abs).filter(u => u && IMGRE.test(u) && !BADIMG.test(u));
+    const rx = (html.match(/https?:\/\/[^"'\s<>\\]+?\.(?:jpe?g|png|webp)/gi) || []).map(fixImg).filter(u => !BADIMG.test(u));
+    urls = [...new Set(g)].length >= 3 ? g : ([...new Set(rx)].length >= 3 ? rx : []);
+  }
+  return [...new Set(urls)];
+}
+async function chapterFromScrape(cfull, tried, ctx) {
+  const path = new URL(cfull).pathname;
+  const sources = [`/komiku${path}`, `https://api.allorigins.win/raw?url=${enc(cfull)}`, `https://corsproxy.io/?url=${enc(cfull)}`, `https://api.codetabs.com/v1/proxy?quest=${enc(cfull)}`];
+  for (const s of sources) {
+    if (ctx.done) break;
+    try {
+      const imgs = parseChapterHtml(await getText(s), cfull);
+      if (imgs.length) return { imgs, d: {} };
+      tried.push('scrape ' + s.slice(0, 40) + ': tanpa gambar');
+    } catch (e) { tried.push('scrape ' + s.slice(0, 40) + ': ' + e.message); }
+  }
+  throw new Error('scrape gagal');
+}
+async function chapterFromApi(cfull, cslug, skip, tried, ctx) {
+  const pairs = [['url', cfull], ['chapter_url', cfull], ['link', cfull], ['slug', cslug], ['id', cslug]];
+  for (const ep of ['chapter', 'read', 'detail']) {
+    for (const [n, v] of pairs) {
+      if (ctx.done) throw new Error('dibatalkan');
+      try {
+        const r = await api(ep, { [n]: v }); const d = r.data !== undefined ? r.data : r;
+        const imgs = extractImages(d, skip).map(fixImg);
+        if (imgs.length) return { imgs, d };
+        tried.push(`api/${ep}?${n}: tanpa gambar`);
+      } catch (e) {
+        tried.push(`api/${ep}?${n}: ${e.message}`);
+        if (/404|not found|endpoint/i.test(e.message)) break;
+      }
+    }
+  }
+  throw new Error('api gagal');
+}
+function anyOk(ps) {
+  return new Promise((res, rej) => { let n = ps.length; ps.forEach(p => p.then(res, () => { if (--n === 0) rej(new Error('semua gagal')); })); });
+}
+async function loadChapter(mslug, cslug) {
+  if (chCache[cslug]) return chCache[cslug];
+  let cfull; try { cfull = new URL(chapUrl(cslug), ORIGIN).href; } catch (e) { cfull = `${ORIGIN}/${enc(cslug)}/`; }
+  const tried = [], ctx = { done: false }, skip = imgByUrl[mangaUrl(mslug)];
+  try {
+    const res = await anyOk([chapterFromScrape(cfull, tried, ctx), chapterFromApi(cfull, cslug, skip, tried, ctx)]);
+    ctx.done = true; return chCache[cslug] = res;
+  } catch (e) {
+    ctx.done = true;
+    throw Object.assign(new Error('Gambar chapter tidak ditemukan'), { tried: tried.slice(0, 20) });
+  }
+}
+
+async function readPage(mslug, cslug) {
+  loading(); window.scrollTo(0, 0);
+  const cfull = chapUrl(cslug);
+  try {
+    const { imgs, d } = await loadChapter(mslug, cslug);
+    let prev = '', next = '';
+    try {
+      const det = await getDetail(mslug); const chs = det.chapters;
+      const i = chs.findIndex(c => slugOf(c.url) === cslug);
+      if (i >= 0) { const nums = chs.map(c => chNum(c.title)); const desc = nums.length > 1 && nums[0] > nums[nums.length - 1]; const a = chs[desc ? i + 1 : i - 1], b = chs[desc ? i - 1 : i + 1]; prev = a ? slugOf(a.url) : ''; next = b ? slugOf(b.url) : ''; }
+    } catch (e) {}
+    if (!prev) { const u = findLink(d, /^(prev|previous)/i); if (u) prev = slugOf(u); }
+    if (!next) { const u = findLink(d, /^next/i); if (u) next = slugOf(u); }
+    const title = (cache[mslug] && cache[mslug].title) || mslug.replace(/-/g, ' ');
+    const lnk = (s, t) => s ? `<a class="btn" href="#/read/${enc(mslug)}/${enc(s)}">${t}</a>` : `<span class="btn alt off">${t}</span>`;
+    const nav = `<div class="rbar"><a class="btn alt" href="#/comic/${enc(mslug)}">Info</a><div style="display:flex;gap:8px">${lnk(prev, '← Prev')}${lnk(next, 'Next →')}</div></div>`;
+    app.innerHTML = `<div class="reader"><h3 style="text-align:center">${esc(title)}<br><small style="color:var(--mut)">${esc(cslug.replace(/-/g, ' '))}</small></h3>${nav}
+      ${imgs.map((u, n) => `<img loading="${n < 3 ? 'eager' : 'lazy'}" referrerpolicy="no-referrer" src="${esc(u)}" alt="Halaman ${n + 1}" onerror="imgErr(this)">`).join('')}${nav}</div>`;
+  } catch (e) {
+    fail('Gagal memuat chapter: ' + e.message, () => readPage(mslug, cslug), e.tried);
+    app.innerHTML += `<div class="pager"><a class="btn alt" target="_blank" rel="noreferrer" href="${esc(cfull)}">Buka chapter di komiku.org</a> <a class="btn alt" href="#/comic/${enc(mslug)}">Info</a></div>`;
+    $('#rt').onclick = () => readPage(mslug, cslug);
+  }
+}
+window.imgErr = el => {
+  const t = +(el.dataset.t || 0); if (!el.dataset.o) el.dataset.o = el.getAttribute('src');
+  if (t < 2) { el.dataset.t = t + 1; setTimeout(() => { el.src = el.dataset.o; }, 800 * (t + 1)); }
+  else if (t === 2) { el.dataset.t = 3; el.src = 'https://images.weserv.nl/?url=' + enc(el.dataset.o.replace(/^https?:\/\//, '')); }
+  else { el.onerror = null; el.outerHTML = `<div class="state" style="background:#181a20">Gambar gagal dimuat <a style="color:var(--ac)" target="_blank" rel="noreferrer" href="${esc(el.dataset.o)}">buka manual</a></div>`; }
+};
+
+// ---------- router ----------
+function setNav(p) {
+  const k = !p.length ? 'home' : p[0] === 'list' ? (p[1] || '') : p[0] === 'genres' || p[0] === 'genre' ? 'genres' : '';
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.dataset.k === k));
+}
+async function route() {
+  const p = (location.hash.slice(1) || '/').split('?')[0].split('/').filter(Boolean).map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });
+  window.scrollTo(0, 0);
+  if (p[0] === 'list' && p[1] === 'populer') { location.replace('#/'); return; }
+  setNav(p);
+  try {
+    if (!p.length) return await home();
+    if (p[0] === 'comic' && p[1]) return await comicPage(p[1]);
+    if (p[0] === 'read' && p[1] && p[2]) return await readPage(p[1], p[2]);
+    if (p[0] === 'list' && p[1]) return await listPage(p[1], p[2] || (p[1] === 'rank' ? 'harian' : 'semua'), p[3]);
+    if (p[0] === 'genres') return await genresPage();
+    if (p[0] === 'genre' && p[1]) return await genrePage(p[1], p[2]);
+    if (p[0] === 'search' && p[1]) return await searchPage(p[1], p[2]);
+    app.innerHTML = '<div class="state">Halaman tidak ditemukan. <a href="#/" style="color:var(--ac)">Kembali</a></div>';
+  } catch (e) { fail('Terjadi kesalahan: ' + e.message, route); }
+}
+$('#sf').onsubmit = e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) location.hash = '#/search/' + enc(q) + '/1'; };
+addEventListener('hashchange', route);
+route();
+</script>
+<script src="/assets/shell.js?v=20261016-notif1"></script>
+</body>
+</html>

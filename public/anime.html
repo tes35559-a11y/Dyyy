@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime — DyyMovie</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/anime.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<link rel="stylesheet" href="/css/dyymovie1-theme.css?v=20261016-notif1" data-dyy-movie-theme="1">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+  <a class="logo" onclick="window.location.href='/home'">
+    <span class="z">D</span><span class="rest">yy</span><span class="dot">Movie</span>
+    <span class="anime-tag">ANIME</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="pulse"></span> Anime Streaming</div>
+    <h1 class="hero-title" id="heroTitle">Nonton Anime<br>Subtitle Indonesia</h1>
+    <div class="hero-meta" id="heroMeta">
+      <span class="pill">HD</span>
+      <span class="pill">Sub Indo</span>
+      <span>Oploverz</span>
+    </div>
+    <p class="hero-desc" id="heroDesc">
+      Streaming anime terbaru, ongoing, dan movie dengan subtitle Indonesia.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="heroPlay">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Mulai Nonton
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<main id="main"></main>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeAnimeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Memuat...</span></div>
+
+<!-- BOTTOM DOCK -->
+<nav class="dock">
+  <button class="dock-btn" data-tab="home" onclick="window.location.href='/home'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Beranda</span>
+  </button>
+  <button class="dock-btn active" data-tab="anime" onclick="routeAnimeTab('anime')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/><circle cx="12" cy="14" r="2"/></svg>
+    <span>Anime</span>
+  </button>
+  <button class="dock-btn" data-tab="search" onclick="routeAnimeTab('search')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <span>Cari</span>
+  </button>
+  <button class="dock-btn" data-tab="favorites" onclick="window.location.href='/favorites'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span>Favorit</span>
+    <span class="dock-badge hidden" id="favBadge">0</span>
+  </button>
+  <button class="dock-btn" data-tab="history" onclick="window.location.href='/history'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+    <span>Riwayat</span>
+    <span class="dock-badge hidden" id="histBadge">0</span>
+  </button>
+</nav>
+
+<script src="/js/anime.js"></script>
+<script src="/js/pc-support.js"></script>
+<script src="/assets/shell.js?v=20261016-notif1"></script>
+</body>
+</html>

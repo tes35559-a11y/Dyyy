@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DyyMovie</title>
+<style>
+*{box-sizing:border-box}
+main{max-width:760px;margin:0 auto;padding:calc(78px + env(safe-area-inset-top,0px)) calc(18px + env(safe-area-inset-left,0px)) calc(56px + env(safe-area-inset-bottom,0px))}
+h1{font-size:2.1rem;margin:0 0 4px;line-height:1.1}
+p.s{color:#5a5346;margin:0 0 22px;font-size:1.15rem}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.c{display:block;padding:16px 16px 18px;color:#1d1b18;text-decoration:none;position:relative}
+.c b{display:block;margin-bottom:4px;font-family:'Caveat','Patrick Hand',cursive;font-size:1.7rem;font-weight:700;line-height:1.1;color:#1d1b18}
+.c span{color:#5a5346;font-size:1.05rem}
+.c:focus-visible{outline:3px solid #a3232b;outline-offset:3px}
+
+/* ── Slider thumbnail ── */
+.slider{position:relative;margin:0 0 26px;border:2px solid #1d1b18;border-radius:14px;overflow:hidden;background:#e9e3d4;box-shadow:4px 5px 0 rgba(29,27,24,.18);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sl-track{display:flex;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.sl-slide{flex:0 0 100%;aspect-ratio:16/9;margin:0;position:relative;overflow:hidden}
+@supports not (aspect-ratio:1/1){.sl-slide{height:0;padding-bottom:56.25%}.sl-slide img{position:absolute;inset:0}}
+.sl-slide img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.sl-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px}
+.sl-dot{width:10px;height:10px;padding:0;border-radius:50%;border:2px solid #1d1b18;background:#fffefb;cursor:pointer;transition:width .25s,background .25s}
+.sl-dot.on{width:26px;border-radius:6px;background:#ffe96b}
+.sl-dot:focus-visible{outline:3px solid #a3232b;outline-offset:2px}
+@media(min-width:900px){
+  main{max-width:1040px;padding-top:84px}
+  .slider{border-radius:18px;margin-bottom:34px}
+  .sl-slide{aspect-ratio:21/9}
+  h1{font-size:2.5rem}
+  .g{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+}
+@media(prefers-reduced-motion:reduce){.sl-track{transition:none}}
+</style>
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/drawer.css?v=20261016-notif1" data-adi-drawer-style="1">
+<meta name="theme-color" content="#F1EDE3">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DyyMovie">
+<meta name="format-detection" content="telephone=no">
+<style>.c.is-disabled{opacity:.62;cursor:not-allowed;pointer-events:none;filter:grayscale(.35)}.down-label{display:inline-flex;vertical-align:middle;align-items:center;padding:2px 7px;margin-left:6px;border:1px solid currentColor;border-radius:5px;background:#a3232b;color:#fff;font:800 10px/1.3 ui-monospace,monospace;letter-spacing:.08em}.c.is-disabled:focus{outline:none}</style>
+</head>
+<body>
+<main>
+<section class="slider" id="slider" aria-roledescription="carousel" aria-label="Thumbnail DyyMovie">
+<div class="sl-track" id="slTrack">
+<figure class="sl-slide"><img src="https://www.gobox.my.id/file/H5GHmMJPkTj8.jpg" alt="Thumbnail 1" referrerpolicy="no-referrer" decoding="async"></figure>
+<figure class="sl-slide"><img src="https://www.gobox.my.id/file/pqzvvQz6uJ2E.jpg" alt="Thumbnail 2" referrerpolicy="no-referrer" decoding="async" loading="lazy"></figure>
+<figure class="sl-slide"><img src="https://www.gobox.my.id/file/j3CNWSLNcat7.jpg" alt="Thumbnail 3" referrerpolicy="no-referrer" decoding="async" loading="lazy"></figure>
+</div>
+<div class="sl-dots" id="slDots"></div>
+</section>
+<h1>Pilih layanan</h1>
+<p class="s">Buka menu di kiri atas kapan saja untuk berpindah.</p>
+<div class="g">
+<a class="c" href="/home"><b>DyyMovie</b><span>Nonton film dan series</span></a>
+<a class="c" href="/movie2/"><b>DyyMovie2</b><span>Nonton film dan series server kedua</span></a>
+<a class="c" href="/dyycomic/"><b>DyyComic</b><span>Baca komik dan chapter</span></a>
+<a class="c" href="/movie/info-dev"><b>Dev Info</b><span>Tentang pengembang DyyMovie</span></a>
+<a class="c" href="/donghua/"><b>DyyHua</b><span>Nonton donghua subtitle Indonesia</span></a>
+<a class="c" href="/dracin/"><b>DyyRacin</b><span>Nonton drama China</span></a>
+<a class="c" href="/stalker/"><b>DyyStalker</b><span>Lihat profil Instagram publik</span></a>
+<a class="c is-disabled" href="/downloader/" aria-disabled="true" tabindex="-1" title="DyyDownloader sedang dinonaktifkan"><b>DyyDownloader <small class="down-label">DOWN</small></b><span>Menu sedang dinonaktifkan</span></a>
+<a class="c" href="/uploader/"><b>DyyUploader</b><span>Ubah foto dan video jadi link</span></a>
+<a class="c" href="/upscale/"><b>DyyUpscale</b><span>Perjelas kualitas foto</span></a>
+</div>
+</main>
+<script>
+(function(){
+  var sl=document.getElementById('slider'),tr=document.getElementById('slTrack'),dw=document.getElementById('slDots');
+  var n=tr.children.length,i=0,t,INTERVAL=12000;
+  for(var k=0;k<n;k++){(function(k){
+    var b=document.createElement('button');b.type='button';b.className='sl-dot';b.setAttribute('aria-label','Slide '+(k+1));
+    b.addEventListener('click',function(){go(k);restart();});dw.appendChild(b);
+  })(k);}
+  function go(x){
+    i=(x+n)%n;tr.style.transform='translateX(-'+(i*100)+'%)';
+    [].forEach.call(dw.children,function(d,j){d.classList.toggle('on',j===i);});
+  }
+  function restart(){clearInterval(t);t=setInterval(function(){go(i+1);},INTERVAL);}
+  // geser dengan jari / mouse
+  var x0=null;
+  sl.addEventListener('pointerdown',function(e){x0=e.clientX;});
+  sl.addEventListener('pointerup',function(e){
+    if(x0===null)return;var dx=e.clientX-x0;x0=null;
+    if(Math.abs(dx)>40){go(dx<0?i+1:i-1);restart();}
+  });
+  sl.addEventListener('pointercancel',function(){x0=null;});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)clearInterval(t);else restart();});
+  go(0);restart();
+})();
+</script>
+<script src="/assets/shell.js?v=20261016-notif1" defer></script>
+</body>
+</html>
